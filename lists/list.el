@@ -21,7 +21,8 @@
     "git"
     "company"
     "lsp"
-    "flycheck")
+    "flycheck"
+    "projectile")
   "The list of modules that exist.")
 
 ;;; list.el ends here
