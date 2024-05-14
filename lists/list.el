@@ -24,7 +24,8 @@
     "flycheck"
     "projectile"
     "rg"
-    "modeline")
+    "modeline"
+    "hl-todo")
   "The list of modules that exist.")
 
 ;;; list.el ends here
