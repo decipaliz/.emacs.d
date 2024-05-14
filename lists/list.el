@@ -17,7 +17,8 @@
     "ivy"
     "counsel"
     "which-key"
-    "vterm")
+    "vterm"
+    "git")
   "The list of modules that exist.")
 
 ;;; list.el ends here
