@@ -13,7 +13,8 @@
     "evil"
 
     "theme"
-    "ivy")
+    "ivy"
+    "counsel")
   "The list of modules that exist.")
 
 ;;; list.el ends here
