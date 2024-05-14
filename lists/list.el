@@ -10,9 +10,10 @@
     "config/custom"
 
     "bind-key"
+    "evil"
 
     "theme"
-    "evil")
+    "ivy")
   "The list of modules that exist.")
 
 ;;; list.el ends here

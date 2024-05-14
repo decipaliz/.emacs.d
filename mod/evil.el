@@ -10,9 +10,6 @@
           (setq evil-undo-system 'undo-redo)
           (evil-mode 1))
 
-(after!
- (define-key evil-motion-state-map (kbd "RET") nil))
-
 (package! evil-collection
           (setq evil-want-integration t)
           (evil-collection-init))
