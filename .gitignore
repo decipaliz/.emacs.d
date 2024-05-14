@@ -26,3 +26,5 @@ elpaca/
 ielm-history.eld
 recentf
 transient/
+.cache/
+.lsp-session-v1

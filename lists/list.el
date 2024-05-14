@@ -19,7 +19,8 @@
     "which-key"
     "vterm"
     "git"
-    "company")
+    "company"
+    "lsp")
   "The list of modules that exist.")
 
 ;;; list.el ends here
