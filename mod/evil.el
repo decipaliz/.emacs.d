@@ -6,7 +6,6 @@
  (setq evil-want-keybinding nil))
 
 (package! evil
-          (bind-key "<escape>" 'keyboard-escape-quit)
           (setq evil-undo-system 'undo-redo)
           (evil-mode 1))
 
