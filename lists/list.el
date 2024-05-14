@@ -23,7 +23,8 @@
     "lsp"
     "flycheck"
     "projectile"
-    "rg")
+    "rg"
+    "modeline")
   "The list of modules that exist.")
 
 ;;; list.el ends here
