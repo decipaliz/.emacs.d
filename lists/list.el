@@ -18,7 +18,8 @@
     "counsel"
     "which-key"
     "vterm"
-    "git")
+    "git"
+    "company")
   "The list of modules that exist.")
 
 ;;; list.el ends here
