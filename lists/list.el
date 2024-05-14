@@ -22,7 +22,8 @@
     "company"
     "lsp"
     "flycheck"
-    "projectile")
+    "projectile"
+    "rg")
   "The list of modules that exist.")
 
 ;;; list.el ends here
