@@ -26,5 +26,10 @@
           `(load-file (expand-file-name ,(concat file ".el") user-emacs-directory)))
         (mapcar #'symbol-name files))))
 
-(provide 'core/macros)
+(defmacro def! (&rest body)
+  "Use `tyrant-def` to define keybindings in BODY."
+  `(add-hook 'after-init-hook
+             (lambda ()
+               (tyrant-def ,@body))))
+
 ;;; macros.el ends here
