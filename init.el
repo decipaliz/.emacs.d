@@ -14,6 +14,7 @@
 (run-hooks 'core/before-load-hook)
 (run-hooks 'core/during-load-hook)
 (elpaca-process-queues)
+(elpaca-wait)
 (run-hooks 'core/after-during-load-hook)
 (run-hooks 'core/after-load-hook)
 
