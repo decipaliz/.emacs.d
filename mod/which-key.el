@@ -10,7 +10,4 @@
           (setq which-key-allow-evil-operators t)
           (which-key-mode +1))
 
-(after!
- (push '((nil . "tab-bar-select-tab") . t) which-key-replacement-alist))
-
 ;;; which-key.el ends here
