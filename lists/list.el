@@ -20,7 +20,8 @@
     "vterm"
     "git"
     "company"
-    "lsp")
+    "lsp"
+    "flycheck")
   "The list of modules that exist.")
 
 ;;; list.el ends here
