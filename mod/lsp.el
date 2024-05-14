@@ -13,4 +13,6 @@
 (package! lsp-ui
           (hooks! lsp-mode-hook #'lsp-ui-mode))
 
+(package! lsp-ivy)
+
 ;;; lsp.el ends here
