@@ -14,7 +14,8 @@
 
     "theme"
     "ivy"
-    "counsel")
+    "counsel"
+    "which-key")
   "The list of modules that exist.")
 
 ;;; list.el ends here
