@@ -8,6 +8,9 @@
 (defvar core/during-load-hook '()
   "List of functions called during package load.")
 
+(defvar core/after-during-load-hook '()
+  "List of functions called immediately after `core/during-load-hook`.")
+
 (defvar core/after-load-hook '()
   "List of functions called after loading all the packages.")
 
@@ -30,10 +33,14 @@
                ,@body)))
 
 (defmacro package! (package &rest body)
-  "Install package PACKAGE and run BODY during package load."
-  `(add-hook 'core/during-load-hook
-             (lambda ()
-               (elpaca ,package ,@body))))
+  "Install package PACKAGE and run BODY after package load."
+  `(progn
+     (add-hook 'core/during-load-hook
+               (lambda ()
+                 (elpaca ,package)))
+     (add-hook 'core/after-during-load-hook
+               (lambda ()
+                 ,@body))))
 
 (defmacro init! (&rest body)
   "Run BODY after all Emacs is fully loaded."
