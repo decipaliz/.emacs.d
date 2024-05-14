@@ -11,6 +11,7 @@
 
     "bind-key"
     "evil"
+    "general"
 
     "theme"
     "ivy"
