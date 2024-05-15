@@ -30,5 +30,6 @@
     "lang/c"
     "lang/go"
     "lang/javascript"
-    "lang/lisp")
+    "lang/lisp"
+    "lang/elisp")
   "The list of modules that exist.")
