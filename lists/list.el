@@ -34,5 +34,6 @@
     "lang/elisp"
     "lang/python"
     "lang/rust"
-    "lang/zig")
+    "lang/zig"
+    "lang/csharp")
   "The list of modules that exist.")
