@@ -4,7 +4,7 @@
 
 (load! core/elpaca)
 (load! core/mod)
-(load! lists/list)
+(load! list)
 
 (core/load-mods)
 
