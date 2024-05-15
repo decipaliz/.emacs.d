@@ -27,5 +27,6 @@
     "org"
     "elcord"
 
-    "lang/c")
+    "lang/c"
+    "lang/go")
   "The list of modules that exist.")
