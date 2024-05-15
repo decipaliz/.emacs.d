@@ -38,4 +38,6 @@
  lang/csharp
  lang/java
  lang/clojure
- lang/lua)
+ lang/lua
+ ;; lang/fennel ;; TODO
+ )
