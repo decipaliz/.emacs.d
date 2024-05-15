@@ -31,5 +31,6 @@
     "lang/go"
     "lang/javascript"
     "lang/lisp"
-    "lang/elisp")
+    "lang/elisp"
+    "lang/python")
   "The list of modules that exist.")
