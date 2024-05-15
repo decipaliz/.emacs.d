@@ -7,7 +7,7 @@
          typescript-mode-hook js-mode-hook)
 
 (when! general
-       (rhooks (lambda ()
+       (rhooks! (lambda ()
                  (tyrant-def
                    "c" (cons "javascript" (make-sparse-keymap))
                    "cd" 'jsdoc))
