@@ -3,4 +3,4 @@ Recently I’ve rewritten my Emacs config since it got too complicated. I’ve d
 
 Overall, there are still some things that aren’t finished, but I think the config is now far more readable than before.
 
-(I also decided to stop using =use-module=)
+(I also decided to stop using =use-package=)
