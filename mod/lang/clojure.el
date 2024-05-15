@@ -17,5 +17,5 @@
 (after!
  (rhooks! #'hs-minor-mode clojure-mode-hook cider-mode-hook)
  (when! lsp (rhooks! #'lsp clojure-mode-hook cider-mode-hook))
- (when! lang/lisp (rlhooks! (clojure-mode-hook cider-mode-hook)
-                            (#'enable-paredit-mode #'rainbow-delimiters-mode))))
+ (when! lispy (rlhooks! (clojure-mode-hook cider-mode-hook)
+                        (#'enable-paredit-mode #'rainbow-delimiters-mode))))

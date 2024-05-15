@@ -4,7 +4,7 @@
 
 (add-to-list 'auto-mode-alist '("\\.fnl\\'" . fennel-mode))
 (hooks! fennel-mode-hook #'hs-minor-mode)
-(when! lang/lisp
+(when! lispy
        (hooks! fennel-mode-hook #'enable-paredit-mode #'rainbow-delimiters-mode))
 (when! lsp
        (after! 

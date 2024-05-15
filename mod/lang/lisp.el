@@ -3,18 +3,14 @@
 (package! sly
           (setq inferior-lisp-program "ros -L sbcl-bin/2.4.0 run"))
 
-(package! paredit)
-
-(package! rainbow-delimiters)
-
-(after!
- (rlhooks! (emacs-lisp-mode-hook
-            eval-expression-minibuffer-setup-hook
-            ielm-mode-hook
-            lisp-interaction-mode-hook
-            lisp-mode-hook
-            sly-mode-hook)
-           (#'enable-paredit-mode #'rainbow-delimiters-mode)))
+(when! lispy
+       (rlhooks! (emacs-lisp-mode-hook
+                  eval-expression-minibuffer-setup-hook
+                  ielm-mode-hook
+                  lisp-interaction-mode-hook
+                  lisp-mode-hook
+                  sly-mode-hook)
+                 (#'enable-paredit-mode #'rainbow-delimiters-mode)))
 
 (hooks! lisp-mode-hook
         #'hs-minor-mode

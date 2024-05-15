@@ -26,6 +26,7 @@
  hl-todo
  org
  ;; elcord
+ lispy
 
  lang/c
  lang/go
