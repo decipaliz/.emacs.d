@@ -1,6 +1,4 @@
-;;; git.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! transient)
 (package! magit)
@@ -13,5 +11,3 @@
  "gg" 'magit
  "gi" 'gitignore-templates-new-file
  "gI" 'gitignore-templates-insert)
-
-;;; git.el ends here

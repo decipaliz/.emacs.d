@@ -1,6 +1,4 @@
-;;; ivy.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! ivy
           (setq ivy-use-virtual-buffers t)
@@ -9,5 +7,3 @@
 
 (package! ivy-rich
           (ivy-rich-mode +1))
-
-;;; ivy.el ends here

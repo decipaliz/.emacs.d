@@ -1,6 +1,4 @@
-;;; macros.el --- General macros. -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (defmacro hooks! (hook &rest exprs)
   "Add EXPRS to the hook HOOK."
@@ -31,5 +29,3 @@
   `(add-hook 'after-init-hook
              (lambda ()
                (tyrant-def ,@body))))
-
-;;; macros.el ends here

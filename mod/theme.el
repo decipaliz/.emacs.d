@@ -1,8 +1,4 @@
-;;; theme.el ---  -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! doom-themes
           (load-theme 'doom-gruvbox t))
-
-;;; theme.el ends here

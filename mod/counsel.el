@@ -1,8 +1,4 @@
-;;; counsel.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! counsel
           (counsel-mode +1))
-
-;;; counsel.el ends here

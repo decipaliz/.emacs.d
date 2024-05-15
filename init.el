@@ -1,6 +1,4 @@
-;;; init.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (load-file (expand-file-name "core/macros.el" user-emacs-directory))
 
@@ -17,5 +15,3 @@
 (elpaca-wait)
 (run-hooks 'core/after-during-load-hook)
 (run-hooks 'core/after-load-hook)
-
-;;; init.el ends here

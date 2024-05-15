@@ -1,6 +1,4 @@
-;;; mod.el --- Module macros and utilities. -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (defvar core/before-load-hook '()
   "List of functions called before loading all the packages.")
@@ -54,5 +52,3 @@
                              (not (member mod disabled)))
                            modlist))
     (load-file (expand-file-name (concat "mod/" mod ".el") user-emacs-directory))))
-
-;;; mod.el ends here

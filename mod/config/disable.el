@@ -1,6 +1,4 @@
-;;; disable.el --- Disable useless modes and other stuff. -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (before!
  (menu-bar-mode 0)
@@ -18,5 +16,3 @@
  (setq load-prefer-newer t)
 
  (setq warning-minimum-level :emergency))
-
-;;; disable.el ends here

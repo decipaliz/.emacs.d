@@ -1,6 +1,4 @@
-;;; modeline.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! nerd-icons)
 
@@ -8,5 +6,3 @@
 
 (package! doom-modeline
           (doom-modeline-mode 1))
-
-;;; modeline.el ends here

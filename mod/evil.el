@@ -1,6 +1,4 @@
-;;; evil.el ---  -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (before!
  (setq evil-want-keybinding nil))
@@ -12,5 +10,3 @@
 (package! evil-collection
           (setq evil-want-integration t)
           (evil-collection-init))
-
-;;; evil.el ends here

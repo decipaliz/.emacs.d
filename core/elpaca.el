@@ -1,6 +1,4 @@
-;;; elpaca.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (defvar elpaca-installer-version 0.7)
 (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
@@ -42,4 +40,3 @@
 ;; (elpaca `(,@elpaca-order))
 
 (provide 'core/elpaca)
-;;; elpaca.el ends here

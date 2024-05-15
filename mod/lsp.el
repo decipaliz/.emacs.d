@@ -1,6 +1,4 @@
-;;; lsp.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! lsp-mode
           (hooks! lsp-mode-hook
@@ -14,5 +12,3 @@
           (hooks! lsp-mode-hook #'lsp-ui-mode))
 
 (package! lsp-ivy)
-
-;;; lsp.el ends here

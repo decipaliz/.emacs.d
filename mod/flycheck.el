@@ -1,6 +1,4 @@
-;;; flycheck.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! flycheck
           (global-flycheck-mode +1)
@@ -24,5 +22,3 @@
                       "1s" 'flycheck-select-checker
                       "1v" 'flycheck-verify-setup
                       "1x" 'flycheck-disable-checker))))
-
-;;; flycheck.el ends here

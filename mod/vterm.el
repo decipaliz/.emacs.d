@@ -1,9 +1,5 @@
-;;; vterm.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! vterm)
 
 (def! "`" 'vterm)
-
-;;; vterm.el ends here

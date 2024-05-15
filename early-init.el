@@ -1,7 +1,3 @@
-;;; early-init.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (setq package-enable-at-startup nil)
-
-;;; early-init.el ends here

@@ -1,6 +1,4 @@
-;;; general.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! general
           (general-auto-unbind-keys)
@@ -65,5 +63,3 @@
  "w." 'evil-window-increase-width
  "ws" 'evil-window-split
  "wv" 'evil-window-vsplit)
-
-;;; general.el ends here

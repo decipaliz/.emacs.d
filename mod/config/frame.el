@@ -1,6 +1,4 @@
-;;; frame.el --- Frame configuration. -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (before!
  (add-to-list 'default-frame-alist '(alpha . 90))
@@ -10,5 +8,3 @@
  (set-face-attribute 'default nil :font "Hack Nerd Font" :height 100)
  (set-face-attribute 'fixed-pitch nil :font "Hack Nerd Font" :height 100)
  (set-face-attribute 'variable-pitch nil :font "Liberation Sans" :height 120))
-
-;;; frame.el ends here

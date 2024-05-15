@@ -1,7 +1,3 @@
-;;; rg.el --- -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! rg)
-
-;;; rg.el ends here

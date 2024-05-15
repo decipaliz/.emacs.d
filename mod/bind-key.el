@@ -1,7 +1,3 @@
-;;; bind-key.el ---  -*- lexical-binding: t -*-
-;;; Commentary:
-;;; Code:
+;; -*- lexical-binding: t -*-
 
 (package! bind-key)
-
-;;; bind-key.el ends here
