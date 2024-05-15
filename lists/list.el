@@ -28,5 +28,6 @@
     "elcord"
 
     "lang/c"
-    "lang/go")
+    "lang/go"
+    "lang/javascript")
   "The list of modules that exist.")
