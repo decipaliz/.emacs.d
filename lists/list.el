@@ -41,4 +41,6 @@
  lang/clojure
  lang/lua
  ;; lang/fennel ;; TODO
- lang/scheme/gambit)
+ lang/scheme/gambit
+ ;; lang/scheme/chicken
+ )
