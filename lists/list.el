@@ -32,5 +32,6 @@
     "lang/javascript"
     "lang/lisp"
     "lang/elisp"
-    "lang/python")
+    "lang/python"
+    "lang/rust")
   "The list of modules that exist.")
