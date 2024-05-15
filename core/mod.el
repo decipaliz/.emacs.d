@@ -51,4 +51,6 @@
   (dolist (mod (seq-filter (lambda (mod)
                              (not (member mod disabled)))
                            modlist))
-    (load-file (expand-file-name (concat "mod/" mod ".el") user-emacs-directory))))
+    (let ((filename (expand-file-name (concat "mod/" mod ".el") user-emacs-directory)))
+      (when (file-exists-p filename)
+        (load-file filename)))))
