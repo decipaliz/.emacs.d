@@ -23,5 +23,6 @@
     "projectile"
     "rg"
     "modeline"
-    "hl-todo")
+    "hl-todo"
+    "org")
   "The list of modules that exist.")
