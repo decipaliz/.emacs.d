@@ -5,9 +5,8 @@
 (load! core/elpaca)
 (load! core/mod)
 (load! lists/list)
-(load! lists/disabled)
 
-(core/load-mods core/module-list core/disabled-module-list)
+(core/load-mods)
 
 (run-hooks 'core/before-load-hook)
 (run-hooks 'core/during-load-hook)

@@ -32,19 +32,16 @@
 
 (defmacro when! (module &rest body)
   (let ((module (if (stringp module) module (symbol-name module))))
-    `(when (and (member ,module core/module-list)
-                (not (member ,module core/disabled-module-list)))
+    `(when (member ,module core/module-list)
        ,@body)))
 
 (defmacro unless! (module &rest body)
   (let ((module (if (stringp module) module (symbol-name module))))
-    `(unless (and (member ,module core/module-list)
-                  (not (member ,module core/disabled-module-list)))
+    `(unless (member ,module core/module-list)
        ,@body)))
 
 (defmacro if! (module then &rest else)
   (let ((module (if (stringp module) module (symbol-name module))))
-    `(if (and (member ,module core/module-list)
-              (not (member ,module core/disabled-module-list)))
+    `(if (member ,module core/module-list)
          ,then
        ,@else)))

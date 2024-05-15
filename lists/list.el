@@ -1,41 +1,40 @@
 ;; -*- lexical-binding: t -*-
 
-(defconst core/module-list
-  '("config/disable"
-    "config/electric"
-    "config/frame"
-    "config/line-numbers"
-    "config/custom"
+(modlist!
+ config/disable
+ config/electric
+ config/frame
+ config/line-numbers
+ config/custom
 
-    "bind-key"
-    "evil"
-    "general"
+ ;; bind-key
+ evil
+ general
 
-    "theme"
-    "ivy"
-    "counsel"
-    "which-key"
-    "vterm"
-    "git"
-    "company"
-    "lsp"
-    "flycheck"
-    "projectile"
-    "rg"
-    "modeline"
-    "hl-todo"
-    "org"
-    "elcord"
+ theme
+ ivy
+ counsel
+ which-key
+ vterm
+ git
+ company
+ lsp
+ flycheck
+ projectile
+ rg
+ modeline
+ hl-todo
+ org
+ ;; elcord
 
-    "lang/c"
-    "lang/go"
-    "lang/javascript"
-    "lang/lisp"
-    "lang/elisp"
-    "lang/python"
-    "lang/rust"
-    "lang/zig"
-    "lang/csharp"
-    "lang/java"
-    "lang/clojure")
-  "The list of modules that exist.")
+ lang/c
+ lang/go
+ lang/javascript
+ lang/lisp
+ lang/elisp
+ lang/python
+ lang/rust
+ lang/zig
+ lang/csharp
+ lang/java
+ lang/clojure)

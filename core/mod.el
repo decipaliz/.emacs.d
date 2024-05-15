@@ -46,11 +46,18 @@
              (lambda ()
                ,@body)))
 
-(defun core/load-mods (modlist disabled)
-  "Load all the modules from MODLIST, while ignoring everything in DISABLED."
-  (dolist (mod (seq-filter (lambda (mod)
-                             (not (member mod disabled)))
-                           modlist))
+(defvar core/module-list '()
+  "The list of modules that are enabled.")
+
+(defmacro modlist! (&rest modlist)
+  `(setq core/module-list (append core/module-list
+                                  ',(mapcar (lambda (mod)
+                                              (if (stringp mod) mod (symbol-name mod)))
+                                            modlist))))
+
+(defun core/load-mods ()
+  "Load all the modules from `core/module-list`."
+  (dolist (mod core/module-list)
     (let ((filename (expand-file-name (concat "mod/" mod ".el") user-emacs-directory)))
       (when (file-exists-p filename)
         (load-file filename)))))
