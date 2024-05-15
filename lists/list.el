@@ -24,5 +24,6 @@
     "rg"
     "modeline"
     "hl-todo"
-    "org")
+    "org"
+    "elcord")
   "The list of modules that exist.")
