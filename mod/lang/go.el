@@ -2,6 +2,6 @@
 
 (package! go-mode)
 
-(hooks go-mode-hook #'lsp #'hs-minor-mode)
+(hooks! go-mode-hook #'lsp #'hs-minor-mode)
 
 (setq-default tab-width 4)
