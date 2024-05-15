@@ -1,0 +1,6 @@
+* My GNU Emacs configuration
+Recently I’ve rewritten my Emacs config since it got too complicated. I’ve decided to use "modules" to structure my config, somewhat like [[https://github.com/doomemacs/doomemacs][Doom Emacs]] does it. These modules are simply flags declared in [[./list.el][list.el]] that state if some feature is enabled or disabled, and if there’s a corresponding file in the [[./mod/][mod]] directory, it is loaded.
+
+Overall, there are still some things that aren’t finished, but I think the config is now far more readable than before.
+
+(I also decided to stop using =use-module=)
