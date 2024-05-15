@@ -35,5 +35,6 @@
     "lang/python"
     "lang/rust"
     "lang/zig"
-    "lang/csharp")
+    "lang/csharp"
+    "lang/java")
   "The list of modules that exist.")
