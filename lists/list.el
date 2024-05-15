@@ -36,5 +36,6 @@
     "lang/rust"
     "lang/zig"
     "lang/csharp"
-    "lang/java")
+    "lang/java"
+    "lang/clojure")
   "The list of modules that exist.")
