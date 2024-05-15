@@ -30,6 +30,9 @@
  "ff" 'find-file
  "fs" 'save-buffer
  "fd" 'dired
+ "fl" (cons "edit modlist" (lambda ()
+                             (interactive)
+                             (find-file (expand-file-name "list.el" user-emacs-directory))))
 
  "o" (cons "launchers" (make-sparse-keymap))
  "oe" 'eshell
@@ -47,6 +50,14 @@
  "qq" 'delete-frame
  "qk" 'save-buffers-kill-emacs
  "qK" 'kill-emacs
+ "qr" (cons "reset" (lambda ()
+                      (interactive)
+                      (scratch-buffer)
+                      (delete-other-windows)
+                      (delete-other-frames)
+                      (dolist (buf (buffer-list))
+                        (unless (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
+                          (kill-buffer (buffer-name buf))))))
 
  "SPC" '("M-x" . execute-extended-command)
  "C-SPC" '("M-x" . execute-extended-command)
