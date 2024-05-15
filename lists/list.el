@@ -25,5 +25,7 @@
     "modeline"
     "hl-todo"
     "org"
-    "elcord")
+    "elcord"
+
+    "lang/c")
   "The list of modules that exist.")
