@@ -44,7 +44,8 @@
             (dired org-roam-directory))
           (org-roam-db-autosync-enable))
 
-(package! evil-org)
+(when! evil
+       (package! evil-org))
 
 (def! "r" (cons "roam" (make-sparse-keymap))
       "rl" 'org-roam-buffer-toggle

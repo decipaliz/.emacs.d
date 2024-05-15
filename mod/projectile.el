@@ -3,6 +3,7 @@
 (package! projectile
           (projectile-mode +1))
 
-(def!
- "p" (cons "projectile" 'projectile-command-map)
- "pa" 'projectile-add-known-project)
+(when! general
+       (def!
+        "p" (cons "projectile" 'projectile-command-map)
+        "pa" 'projectile-add-known-project))

@@ -11,4 +11,5 @@
 (package! lsp-ui
           (hooks! lsp-mode-hook #'lsp-ui-mode))
 
-(package! lsp-ivy)
+(when! ivy
+       (package! lsp-ivy))

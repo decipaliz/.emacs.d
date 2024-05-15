@@ -3,8 +3,12 @@
 (package! jsdoc)
 (package! typescript-mode)
 
-(rlhooks! (typescript-mode-hook js-mode-hook)
-          (#'lsp #'hs-minor-mode (lambda ()
-                                   (tyrant-def
-                                     "c" (cons "javascript" (make-sparse-keymap))
-                                     "cd" 'jsdoc))))
+(rhooks! #'hs-minor-mode
+         typescript-mode-hook js-mode-hook)
+
+(when! general
+       (rhooks (lambda ()
+                 (tyrant-def
+                   "c" (cons "javascript" (make-sparse-keymap))
+                   "cd" 'jsdoc))
+               typescript-mode-hook js-mode-hook))

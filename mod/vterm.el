@@ -2,4 +2,5 @@
 
 (package! vterm)
 
-(def! "`" 'vterm)
+(when! general
+       (def! "`" 'vterm))
