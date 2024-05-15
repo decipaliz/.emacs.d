@@ -37,4 +37,5 @@
  lang/zig
  lang/csharp
  lang/java
- lang/clojure)
+ lang/clojure
+ lang/lua)
