@@ -29,5 +29,6 @@
 
     "lang/c"
     "lang/go"
-    "lang/javascript")
+    "lang/javascript"
+    "lang/lisp")
   "The list of modules that exist.")
