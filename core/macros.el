@@ -29,3 +29,22 @@
   `(add-hook 'after-init-hook
              (lambda ()
                (tyrant-def ,@body))))
+
+(defmacro when! (module &rest body)
+  (let ((module (if (stringp module) module (symbol-name module))))
+    `(when (and (member ,module core/module-list)
+                (not (member ,module core/disabled-module-list)))
+       ,@body)))
+
+(defmacro unless! (module &rest body)
+  (let ((module (if (stringp module) module (symbol-name module))))
+    `(unless (and (member ,module core/module-list)
+                  (not (member ,module core/disabled-module-list)))
+       ,@body)))
+
+(defmacro if! (module then &rest else)
+  (let ((module (if (stringp module) module (symbol-name module))))
+    `(if (and (member ,module core/module-list)
+              (not (member ,module core/disabled-module-list)))
+         ,then
+       ,@else)))
