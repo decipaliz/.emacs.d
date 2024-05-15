@@ -43,4 +43,5 @@
  ;; lang/fennel ;; TODO
  lang/scheme/gambit
  ;; lang/scheme/chicken
+ ;; lang/scheme/chez
  )
