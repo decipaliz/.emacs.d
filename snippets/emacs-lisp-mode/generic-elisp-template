@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Generic ELisp Template
+# key: gen
+# --
+
+;;; ${1:`(file-name-base (or (buffer-file-name) "file.el"))`}.el --- $2 -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
+
+$0
+
+(provide '$1)
+;;; $1.el ends here

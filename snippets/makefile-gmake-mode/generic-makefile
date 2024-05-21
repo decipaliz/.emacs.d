@@ -1,0 +1,27 @@
+# -*- mode: snippet -*-
+# name: generic makefile
+# key: gen
+# --
+
+NAME = ${1:hello_world}
+AUTHOR = DeciPaliz
+VERSION = ${2:0.0.1}
+
+SOURCES=${3:src/main.c}
+OUTDIR=${4:out}
+
+CC=${5:clang}
+CFLAGS=-c -Wall \$(SOURCES)
+LDFLAGS=${6:} -o \$(OUTDIR)/\$(NAME)
+
+all: build link clean
+
+build:
+    \$(CC) \$(CFLAGS)
+
+link:
+    mkdir -p \$(OUTDIR)
+    \$(CC) *.o \$(LDFLAGS)
+
+clean:
+    rm *.o

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inpackage
+# key: inp
+# --
+(in-package :${1:cl-user})

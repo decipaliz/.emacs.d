@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: hash bang r6rs
+# key: rnrs
+# --
+
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
