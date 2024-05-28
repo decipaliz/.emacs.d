@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (before!
- (add-to-list 'default-frame-alist '(alpha . 90))
+ (add-to-list 'default-frame-alist '(alpha . 95))
  (add-to-list 'default-frame-alist '(fullscreen . maximized))
  (add-to-list 'default-frame-alist '(undecorated . t))
 
