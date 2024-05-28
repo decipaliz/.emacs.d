@@ -12,3 +12,7 @@
                    "c" (cons "javascript" (make-sparse-keymap))
                    "cd" 'jsdoc))
                typescript-mode-hook js-mode-hook))
+
+(when! lsp
+       (rhooks! #'lsp
+                typescript-mode-hook js-mode-hook))
