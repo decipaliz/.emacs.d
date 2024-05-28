@@ -34,7 +34,8 @@
                     (visual-fill-column-mode 1))))
 
 (package! org-bullets
-          (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+          (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
+          (hooks! org-mode-hook #'org-bullets-mode))
 
 (package! org-roam
           (setq org-roam-directory "~/dev/roam")
