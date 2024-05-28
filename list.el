@@ -18,6 +18,7 @@
  counsel
  which-key
  vterm
+ yasnippet
  git
  company
  lsp
