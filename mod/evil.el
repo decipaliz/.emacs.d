@@ -1,10 +1,10 @@
 ;; -*- lexical-binding: t -*-
 
 (before!
- (setq evil-want-keybinding nil))
+ (setq evil-want-keybinding nil)
+ (setq evil-undo-system 'undo-redo))
 
 (package! evil
-          (setq evil-undo-system 'undo-redo)
           (evil-mode 1))
 
 (package! evil-collection
