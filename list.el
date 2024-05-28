@@ -29,6 +29,7 @@
  org
  ;; elcord
  lispy
+ centaur
 
  lang/c
  lang/go
