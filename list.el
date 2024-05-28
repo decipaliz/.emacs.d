@@ -7,6 +7,8 @@
  config/line-numbers
  config/custom
 
+ local/gradle
+
  ;; bind-key
  evil
  general
