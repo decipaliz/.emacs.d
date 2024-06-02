@@ -9,9 +9,10 @@
 
  local/gradle
 
- ;; bind-key
  evil
+ ;; god
  general
+ ;; bind-key
 
  theme
  ivy

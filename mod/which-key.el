@@ -7,3 +7,7 @@
                 which-key-sort-order 'which-key-key-order-alpha)
           (setq which-key-allow-evil-operators t)
           (which-key-mode +1))
+
+(after!
+ (when! god
+        (which-key-enable-god-mode-support)))
