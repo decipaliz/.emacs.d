@@ -31,6 +31,7 @@
  ;; elcord
  lispy
  centaur
+ treemacs
 
  lang/c
  lang/go
