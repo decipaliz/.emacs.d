@@ -63,4 +63,6 @@
   (dolist (mod core/enabled-modules-list)
     (let ((filename (expand-file-name (concat "mod/" mod ".el") user-emacs-directory)))
       (when (file-exists-p filename)
-        (load-file filename)))))
+        (load-file filename))))
+  (when (length= core/enabled-modules-list 0)
+    (message "To enable modules, run `modlist`.")))
