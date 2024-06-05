@@ -5,7 +5,8 @@
  (setq evil-undo-system 'undo-redo))
 
 (package! evil
-          (evil-mode 1))
+          (evil-mode 1)
+          (add-to-list 'evil-emacs-state-modes 'modlist-mode))
 
 (package! evil-collection
           (setq evil-want-integration t)

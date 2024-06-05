@@ -10,9 +10,9 @@
  local/gradle
 
  evil
- ;; god
+ god
  general
- ;; bind-key
+ bind-key
 
  theme
  ivy
@@ -29,7 +29,7 @@
  modeline
  hl-todo
  org
- ;; elcord
+ elcord
  lispy
  centaur
  treemacs
@@ -48,6 +48,5 @@
  lang/lua
  ;; lang/fennel ;; TODO
  lang/scheme/gambit
- ;; lang/scheme/chicken
- ;; lang/scheme/chez
- )
+ lang/scheme/chicken
+ lang/scheme/chez)

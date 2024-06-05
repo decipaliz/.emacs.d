@@ -34,15 +34,13 @@
  "ff" 'find-file
  "fs" 'save-buffer
  "fd" 'dired
- "fl" (cons "edit modlist" (lambda ()
-                             (interactive)
-                             (find-file (expand-file-name "list.el" user-emacs-directory))))
 
  "o" (cons "launchers" (make-sparse-keymap))
  "oe" 'eshell
  "op" 'list-processes
  "oi" 'ielm
  "os" 'scratch-buffer
+ "om" 'modlist
 
  "h" (cons "describe" (make-sparse-keymap))
  "hv" 'describe-variable

@@ -4,7 +4,11 @@
 
 (load! core/elpaca)
 (load! core/mod)
+(load! core/modlist-mode)
 (load! list)
+
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file t t)
 
 (core/load-mods)
 

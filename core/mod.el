@@ -47,6 +47,9 @@
                ,@body)))
 
 (defvar core/module-list '()
+  "The list of modules that exist.")
+
+(defcustom core/enabled-modules-list '()
   "The list of modules that are enabled.")
 
 (defmacro modlist! (&rest modlist)
@@ -56,8 +59,8 @@
                                             modlist))))
 
 (defun core/load-mods ()
-  "Load all the modules from `core/module-list`."
-  (dolist (mod core/module-list)
+  "Load all the modules from `core/enabled-modules-list`."
+  (dolist (mod core/enabled-modules-list)
     (let ((filename (expand-file-name (concat "mod/" mod ".el") user-emacs-directory)))
       (when (file-exists-p filename)
         (load-file filename)))))
