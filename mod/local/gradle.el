@@ -7,7 +7,6 @@
 
  ;; TODO: maybe use regular expressions like a normal person
  (defun gradle-list--get-tasks ()
-   (message (projectile-project-root))
    (let* ((res (shell-command-to-string (format "(cd %s; ./gradlew tasks --all --console plain)" (projectile-project-root))))
           (res (split-string res "\n"))
           (res (cl-remove-if-not (lambda (x) (let ((seq (member ?- (string-to-list x))))
