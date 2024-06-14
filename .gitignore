@@ -33,3 +33,5 @@ custom.el
 .dap-breakpoints
 eclipse.jdt.ls/
 workspace/
+session.*
+racket-mode/
