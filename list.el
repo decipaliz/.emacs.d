@@ -14,6 +14,7 @@
  general
  bind-key
 
+ exec-path-from-shell
  theme
  ivy
  counsel
