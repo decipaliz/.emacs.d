@@ -12,7 +12,8 @@
                    :prefix (kbd "C-c u"))))
 
 (def!
- "~" '("async shell cmd" . async-shell-command)
+ "x" 'shell-command
+ "X" 'async-shell-command
 
  "9" 'insert-parentheses
  "/" 'comment-line
