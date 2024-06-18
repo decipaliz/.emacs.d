@@ -47,7 +47,7 @@
  lang/java
  lang/clojure
  lang/lua
- ;; lang/fennel ;; TODO
+ lang/fennel
  lang/scheme/gambit
  lang/scheme/chicken
  lang/scheme/chez
