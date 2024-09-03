@@ -102,6 +102,9 @@
                            :activation-fn (lsp-activate-on "fennel")
                            :server-id 'fennel-ls)))
 
+;;; Ren’Py ;;;
+(elpaca (renpy :host github :repo "Reagankm/renpy-mode"))
+
 ;;; Lisp ;;;
 (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp))
 (use-package sly :demand t
