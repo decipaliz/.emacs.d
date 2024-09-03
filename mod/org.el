@@ -37,13 +37,13 @@
           (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
           (hooks! org-mode-hook #'org-bullets-mode))
 
-(package! org-roam
-          (setq org-roam-directory "~/dev/roam")
-          (setq org-roam-db-location "~/dev/roam/org-roam.db")
-          (defun rc/open-roam-dir ()
-            (interactive)
-            (dired org-roam-directory))
-          (org-roam-db-autosync-enable))
+;; (package! org-roam
+;;           (setq org-roam-directory "~/dev/roam")
+;;           (setq org-roam-db-location "~/dev/roam/org-roam.db")
+;;           (defun rc/open-roam-dir ()
+;;             (interactive)
+;;             (dired org-roam-directory))
+;;           (org-roam-db-autosync-enable))
 
 (when! evil
        (package! evil-org))

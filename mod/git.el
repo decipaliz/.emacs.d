@@ -2,6 +2,7 @@
 
 (package! transient)
 (package! magit)
+(package! magit-section)
 (package! gitignore-templates)
 (package! git-gutter
           (global-git-gutter-mode +1))
