@@ -1,15 +1,15 @@
 ;; -*- lexical-binding: t -*-
 
-(package! general
-          (general-auto-unbind-keys)
-          (when! evil
-                 (general-create-definer tyrant-def
-                   :keymaps '(normal insert visual motion emacs)
-                   :prefix "SPC"
-                   :global-prefix (kbd "C-c u")))
-          (when! god
-                 (general-create-definer tyrant-def
-                   :prefix (kbd "C-c u"))))
+(use-package general :demand t
+  :init
+  (general-auto-unbind-keys)
+  (general-create-definer tyrant-def
+    :keymaps '(normal insert visual motion emacs)
+    :prefix "SPC"
+    :global-prefix (kbd "C-c u"))
+  ;; (general-create-definer tyrant-def
+  ;;   :prefix (kbd "C-c u"))
+  )
 
 (def!
  "x" 'shell-command

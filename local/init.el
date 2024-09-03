@@ -1,3 +1,3 @@
 ;; -*- lexical-binding: t -*-
 
-(package! rg)
+(load! local/gradle)
