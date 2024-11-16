@@ -58,7 +58,9 @@
   ;; (which-key-enable-god-mode-support)
   )
 
-(use-package vterm)
+(use-package vterm
+  :init
+  (hooks! vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
 (def! "`" 'vterm)
 
 (use-package yasnippet
