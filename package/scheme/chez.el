@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
-(use-package geiser :demand t)
-(use-package geiser-chez :demand t)
+(use-package geiser)
+(use-package geiser-chez)
 (setq scheme-program-name "scheme")
 (hooks! scheme-mode-hook #'hs-minor-mode
         #'enable-paredit-mode #'rainbow-delimiters-mode

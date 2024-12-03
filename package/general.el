@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
-(use-package general :demand t
+(use-package general
   :init
   (general-auto-unbind-keys)
   (general-create-definer tyrant-def

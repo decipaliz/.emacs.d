@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
-(use-package geiser :demand t)
-(use-package geiser-chicken :demand t)
+(use-package geiser)
+(use-package geiser-chicken)
 (setq scheme-program-name "csi -:c-")
 
 (hooks! scheme-mode-hook #'hs-minor-mode

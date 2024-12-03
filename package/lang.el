@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 ;;; C ;;;
-(use-package cmake-mode :demand t)
+(use-package cmake-mode)
 (rlhooks! (c-mode-hook c++-mode-hook) (#'lsp #'hs-minor-mode))
 
 (setq c-basic-offset 4)
@@ -11,8 +11,8 @@
 (hooks! csharp-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; JavaScript ;;;
-(use-package jsdoc :demand t)
-(use-package typescript-mode :demand t)
+(use-package jsdoc)
+(use-package typescript-mode)
 
 (rlhooks! (typescript-mode-hook js-mode-hook)
           (#'hs-minor-mode #'lsp
@@ -28,20 +28,20 @@
           (tyrant-def
             "c" (cons "java" (make-sparse-keymap))
             "cg" #'gradle-list-run-task)))
-(use-package hydra :demand t)
-(use-package lsp-java :demand t)
+(use-package hydra)
+(use-package lsp-java)
 
 ;;; Python ;;;
 (hooks! python-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; Lua ;;;
-(use-package lua-mode :demand t
+(use-package lua-mode
   :init
   (setq lua-indent-level 4))
 (hooks! lua-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; Rust ;;;
-(use-package rustic :demand t)
+(use-package rustic)
 
 (hooks! rust-mode-hook
         #'hs-minor-mode
@@ -61,7 +61,7 @@
             "cf" 'rustic-format-buffer)))
 
 ;;; Clojure ;;;
-(use-package cider :demand t
+(use-package cider
   :init
   (hooks! clojure-mode-hook
           (lambda ()
@@ -81,12 +81,12 @@
 
 
 ;;; Go ;;;
-(use-package go-mode :demand t)
+(use-package go-mode)
 (hooks! go-mode-hook #'hs-minor-mode #'lsp)
 (setq-default tab-width 4)
 
 ;;; Zig ;;;
-(use-package zig-mode :demand t)
+(use-package zig-mode)
 (hooks! zig-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; Fennel ;;;
@@ -107,7 +107,7 @@
 
 ;;; Lisp ;;;
 (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp))
-(use-package sly :demand t
+(use-package sly
   :init
           (setq inferior-lisp-program "ros -L sbcl-bin/2.4.0 run"))
 (rlhooks! (emacs-lisp-mode-hook
@@ -134,7 +134,7 @@
             "cem" 'sly-eval-macroexpand)))
 
 ;;; Racket ;;;
-(use-package racket-mode :demand t)
+(use-package racket-mode)
 (hooks! racket-mode-hook #'enable-paredit-mode #'rainbow-delimiters-mode
         (lambda ()
           (tyrant-def
