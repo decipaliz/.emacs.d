@@ -89,6 +89,12 @@
 (use-package zig-mode)
 (hooks! zig-mode-hook #'hs-minor-mode #'lsp)
 
+;;; HTML ;;;
+(hooks! html-mode-hook #'hs-minor-mode #'lsp)
+
+;;; CSS ;;;
+(rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp))
+
 ;;; Fennel ;;;
 (elpaca (fennel-mode :repo "https://git.sr.ht/~technomancy/fennel-mode"))
 (add-to-list 'auto-mode-alist '("\\.fnl\\'" . fennel-mode))
