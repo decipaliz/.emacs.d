@@ -90,7 +90,7 @@
 (hooks! zig-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; HTML ;;;
-(hooks! html-mode-hook #'hs-minor-mode #'lsp)
+(hooks! html-mode-hook #'hs-minor-mode)
 
 ;;; CSS ;;;
 (rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp))
