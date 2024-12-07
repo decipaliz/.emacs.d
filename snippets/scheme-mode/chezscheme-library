@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: chezscheme library
-# key: sls chezlib
+# key: sls
 # --
 
 #!chezscheme ; -*- mode: scheme; coding: utf-8 -*-
