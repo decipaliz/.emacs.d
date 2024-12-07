@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: library
+# key: lib
+# --
+
+#!r6rs ; -*- mode: scheme; coding: utf-8 -*-
+
+;; (library ($1)
+;;   (export$2)
+(import (rnrs))
+
+$0
+
+;; )

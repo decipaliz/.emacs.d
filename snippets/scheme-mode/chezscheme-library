@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: chezscheme library
+# key: sls chezlib
+# --
+
+#!chezscheme ; -*- mode: scheme; coding: utf-8 -*-
+
+;; (library ($1)
+;;   (export$2)
+(import (chezscheme))
+
+$0
+
+;; )

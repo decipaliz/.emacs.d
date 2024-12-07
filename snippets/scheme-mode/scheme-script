@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: scheme-script
+# key: sps
+# --
+
+#!/usr/bin/env -S scheme-script -q --script
+#!chezscheme ; -*- mode: scheme; coding: utf-8 -*-
+
+(import ($1))
+(${2:main})
