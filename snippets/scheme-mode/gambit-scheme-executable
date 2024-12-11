@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: gambit scheme executable
+# key: main
+# --
+
+#!/usr/bin/env -S gsi-script . $1
+; -*- mode: scheme; coding: utf-8 -*-
+
+(import ${2:(scheme base)})
+
+(define (main . args)
+  $0)

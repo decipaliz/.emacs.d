@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: gambit scheme library
+# key: sld
+# --
+
+; -*- mode: scheme; coding: utf-8 -*-
+
+(define-library (${1:`(file-name-nondirectory (file-name-sans-extension (or (buffer-file-name) "")))`})
+  (export$2)
+  (import (scheme base)$3)
+  (begin
+    $0))
