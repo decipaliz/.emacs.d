@@ -154,6 +154,6 @@
             "chd" 'racket-documentation-search)))
 
 ;;; Scheme ;;;
-(load! package/scheme/chez)
+;; (load! package/scheme/chez)
 ;; (load! package/scheme/chicken)
-;; (load! package/scheme/gambit)
+(load! package/scheme/gambit)
