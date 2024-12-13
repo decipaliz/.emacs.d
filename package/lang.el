@@ -156,4 +156,5 @@
 ;;; Scheme ;;;
 ;; (load! package/scheme/chez)
 ;; (load! package/scheme/chicken)
-(load! package/scheme/gambit)
+;; (load! package/scheme/gambit)
+(load! package/scheme/gerbil)
