@@ -28,7 +28,8 @@
  "bs" 'save-some-buffers
 
  "w" (cons "windows" (make-sparse-keymap))
- "wo" 'delete-other-windows
+ "wo" 'other-window
+ "wO" 'delete-other-windows
  "wb" 'balance-windows
 
  "f" (cons "dired" (make-sparse-keymap))
