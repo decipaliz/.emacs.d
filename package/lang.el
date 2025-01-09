@@ -12,6 +12,7 @@
 
 ;;; JavaScript ;;;
 (use-package jsdoc)
+(use-package lorem-ipsum)
 (use-package typescript-mode)
 
 (rlhooks! (typescript-mode-hook js-mode-hook)
@@ -19,7 +20,11 @@
                            (lambda ()
                              (tyrant-def
                                "c" (cons "javascript" (make-sparse-keymap))
-                               "cd" 'jsdoc))))
+                               "cd" 'jsdoc
+                               "cl" (cons "lorem" (make-sparse-keymap))
+                               "cll" #'lorem-ipsum-insert-paragraphs
+                               "cls" #'lorem-ipsum-insert-sentences
+                               "cli" #'lorem-ipsum-insert-list))))
 
 ;;; Java ;;;
 (hooks! java-mode-hook #'hs-minor-mode
@@ -90,7 +95,14 @@
 (hooks! zig-mode-hook #'hs-minor-mode #'lsp)
 
 ;;; HTML ;;;
-(hooks! html-mode-hook #'hs-minor-mode)
+(hooks! html-mode-hook #'hs-minor-mode
+        (lambda ()
+          (tyrant-def
+            "c" (cons "html" (make-sparse-keymap))
+            "cl" (cons "lorem" (make-sparse-keymap))
+            "cll" #'lorem-ipsum-insert-paragraphs
+            "cls" #'lorem-ipsum-insert-sentences
+            "cli" #'lorem-ipsum-insert-list)))
 
 ;;; CSS ;;;
 (rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp))
