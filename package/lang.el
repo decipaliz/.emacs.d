@@ -127,7 +127,7 @@
 (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp))
 (use-package sly
   :init
-          (setq inferior-lisp-program "ros -L sbcl-bin/2.4.0 run"))
+  (setq inferior-lisp-program "ros run"))
 (rlhooks! (emacs-lisp-mode-hook
            eval-expression-minibuffer-setup-hook
            ielm-mode-hook
@@ -151,6 +151,9 @@
             "cer" 'sly-eval-region
             "cem" 'sly-eval-macroexpand)))
 
+(hooks! sly-mode-hook
+        (lambda ()
+          (local-set-key (kbd "M-RET") #'sly-mrepl-return)))
 ;;; Racket ;;;
 (use-package racket-mode)
 (hooks! racket-mode-hook #'enable-paredit-mode #'rainbow-delimiters-mode
