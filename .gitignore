@@ -36,3 +36,4 @@ workspace/
 session.*
 racket-mode/
 url/
+lsp-cache/

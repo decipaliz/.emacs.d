@@ -26,6 +26,10 @@
                                "cls" #'lorem-ipsum-insert-sentences
                                "cli" #'lorem-ipsum-insert-list))))
 
+;;; PHP ;;;
+(use-package php-mode)
+(hooks! php-mode-hook #'hs-minor-mode #'lsp)
+
 ;;; Java ;;;
 (hooks! java-mode-hook #'hs-minor-mode
         #'lsp
@@ -173,3 +177,11 @@
 ;; (load! package/scheme/chicken)
 ;; (load! package/scheme/gambit)
 (load! package/scheme/gerbil)
+
+;;; Haskell ;;;
+(use-package haskell-mode)
+(use-package lsp-haskell)
+(hooks! haskell-mode-hook #'hs-minor-mode #'lsp
+        (lambda ()
+          (tyrant-def
+            "c" (cons "haskell" (make-sparse-keymap)))))
