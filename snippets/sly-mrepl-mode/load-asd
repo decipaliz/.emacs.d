@@ -1,0 +1,23 @@
+# -*- mode: snippet -*-
+# name: load asd
+# key: load
+# --
+
+(labels ((root-p (pathname)
+           (eq pathname #p"/"))
+         (parent-directory (pathname)
+           (uiop:pathname-parent-directory-pathname pathname))
+         (project-dir-p (pathname)
+           (and (probe-file (merge-pathnames ".git" pathname))
+                (probe-file (merge-pathnames "$1.asd" pathname))))
+         (rec (pathname)
+           (cond
+             ((root-p pathname) nil)
+             ((project-dir-p pathname) (merge-pathnames "$1.asd" pathname))
+             (t (rec (parent-directory pathname))))))
+  (let ((res (rec (uiop:getcwd))))
+    (if res
+        (progn
+          (asdf:load-asd res)
+          (asdf:load-system :$1))
+        (format t "couldn’t find a project"))))

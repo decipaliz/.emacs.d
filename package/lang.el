@@ -145,9 +145,10 @@
           (tyrant-def
             "c" (cons "lisp" (make-sparse-keymap))
             "cs" 'sly
-            "cr" 'sly-reset
+            "cr" 'sly-restart-inferior-lisp
             "ca" 'sly-apropos
             "ck" 'sly-thread-kill
+            "cc" 'sly-mrepl-clear-repl
 
             "ce" (cons "eval" (make-sparse-keymap))
             "cee" 'sly-eval-last-expression
