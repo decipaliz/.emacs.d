@@ -19,7 +19,7 @@
  "/" 'comment-line
 
  "b" (cons "buffers" (make-sparse-keymap))
- "bd" 'kill-this-buffer
+ "bd" 'kill-current-buffer
  "bb" 'switch-to-buffer
  "bj" 'next-buffer
  "bk" 'previous-buffer
