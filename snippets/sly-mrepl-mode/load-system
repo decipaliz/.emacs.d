@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: load system
+# key: load
+# --
+
+(labels ((root-p (pathname)
+           (eq pathname #p"/"))
+         (parent-directory (pathname)
+           (uiop:pathname-parent-directory-pathname pathname))
+         (get-project-name (pathname)
+           (let ((files (uiop:directory-files pathname)))
+             (some (lambda (file)
+                     (let ((len (length file)))
+                       (when (and (> len 4)
+                                  (string= ".asd" (subseq file (- len 4) len)))
+                         (subseq file 0 (- len 4)))))
+                   (mapcar #'file-namestring files))))
+         (rec (pathname)
+           (if (root-p pathname) nil
+               (let ((project-name (get-project-name pathname)))
+                 (if project-name
+                     (values (merge-pathnames (format nil "~a.asd" project-name)
+                                              pathname)
+                             project-name)
+                     (rec (parent-directory pathname)))))))
+  (multiple-value-bind (path project-name) (rec (uiop:getcwd))
+    (if path
+        (progn
+          (asdf:load-asd path)
+          (ql:quickload project-name))
+        (format t "couldn’t find a project"))))
