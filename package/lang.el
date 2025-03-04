@@ -186,3 +186,7 @@
         (lambda ()
           (tyrant-def
             "c" (cons "haskell" (make-sparse-keymap)))))
+
+;;; Docker ;;;
+(add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode))
+(use-package docker-compose-mode)
