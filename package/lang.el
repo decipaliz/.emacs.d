@@ -154,7 +154,12 @@
             "cee" 'sly-eval-last-expression
             "ceb" 'sly-eval-buffer
             "cer" 'sly-eval-region
-            "cem" 'sly-eval-macroexpand)))
+            "cem" 'sly-eval-macroexpand
+
+            "ch" (cons "help" (make-sparse-keymap))
+            "chs" 'sly-describe-symbol
+            "chd" 'sly-documentation
+            "chh" 'sly-documentation-lookup)))
 
 (hooks! sly-mode-hook
         (lambda ()
