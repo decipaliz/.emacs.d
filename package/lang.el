@@ -159,7 +159,15 @@
             "ch" (cons "help" (make-sparse-keymap))
             "chs" 'sly-describe-symbol
             "chd" 'sly-documentation
-            "chh" 'sly-documentation-lookup)))
+            "chh" 'sly-documentation-lookup
+
+            "cm" (cons "macroexpand" (make-sparse-keymap))
+            "cmm" 'sly-macroexpand-1
+            "cmM" 'sly-macroexpand-all
+            "cmi" 'sly-macroexpand-1-inplace
+            "cmI" 'sly-macroexpand-all-inplace
+            "cma" 'sly-macroexpand-again
+            "cmu" 'sly-macroexpand-undo)))
 
 (hooks! sly-mode-hook
         (lambda ()
