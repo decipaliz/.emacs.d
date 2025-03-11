@@ -88,7 +88,8 @@
 
 (use-package company
   :init
-  (global-company-mode +1))
+  (global-company-mode +1)
+  (define-key evil-insert-state-map (kbd "TAB") 'company-indent-or-complete-common))
 
 (use-package lsp-mode
   :init
