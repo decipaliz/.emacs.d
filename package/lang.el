@@ -28,7 +28,7 @@
 
 ;;; PHP ;;;
 (use-package php-mode)
-(hooks! php-mode-hook #'hs-minor-mode #'lsp)
+(hooks! php-mode-hook #'hs-minor-mode)
 
 ;;; Java ;;;
 (hooks! java-mode-hook #'hs-minor-mode
@@ -142,6 +142,7 @@
 (hooks! lisp-mode-hook
         #'hs-minor-mode
         (lambda ()
+          (local-set-key (kbd "C-\\") (lambda () (interactive) (insert "λ")))
           (tyrant-def
             "c" (cons "lisp" (make-sparse-keymap))
             "cs" 'sly
@@ -171,7 +172,9 @@
 
 (hooks! sly-mode-hook
         (lambda ()
-          (local-set-key (kbd "M-RET") #'sly-mrepl-return)))
+          (local-set-key (kbd "M-RET") #'sly-mrepl-return)
+          (local-set-key (kbd "C-\\") (lambda () (interactive) (insert "λ")))))
+
 ;;; Racket ;;;
 (use-package racket-mode)
 (hooks! racket-mode-hook #'enable-paredit-mode #'rainbow-delimiters-mode
