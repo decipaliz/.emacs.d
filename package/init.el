@@ -84,7 +84,8 @@
  "g" (cons "git" (make-sparse-keymap))
  "gg" 'magit
  "gi" 'gitignore-templates-new-file
- "gI" 'gitignore-templates-insert)
+ "gI" 'gitignore-templates-insert
+ "gb" 'magit-blame)
 
 (use-package company
   :init
