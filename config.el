@@ -1,7 +1,10 @@
-(menu-bar-mode 0)
-(when (display-graphic-p)
-  (tool-bar-mode 0)
-  (scroll-bar-mode 0))
+(mapcar
+ (lambda (func)
+   (when (fboundp func)
+     (funcall func 0)))
+ (list #'menu-bar-mode
+       #'tool-bar-mode
+       #'scroll-bar-mode))
 
 (setq inhibit-startup-screen t)
 
