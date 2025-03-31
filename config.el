@@ -34,5 +34,7 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 
+(setq-default cursor-type 'bar)
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file t t)
