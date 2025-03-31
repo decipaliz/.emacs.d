@@ -14,9 +14,10 @@
 (use-package jsdoc)
 (use-package lorem-ipsum)
 (use-package typescript-mode)
+(use-package prettier-js)
 
 (rlhooks! (typescript-mode-hook js-mode-hook)
-          (#'hs-minor-mode #'lsp
+          (#'hs-minor-mode #'lsp #'prettier-js-mode
                            (lambda ()
                              (tyrant-def
                                "c" (cons "javascript" (make-sparse-keymap))
@@ -118,11 +119,11 @@
 (hooks! fennel-mode-hook #'hs-minor-mode #'lsp
         #'enable-paredit-mode #'rainbow-delimiters-mode)
 (with-eval-after-load 'lsp-mode
-         (add-to-list 'lsp-language-id-configuration '(fennel-mode . "fennel"))
-         (lsp-register-client
-          (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
-                           :activation-fn (lsp-activate-on "fennel")
-                           :server-id 'fennel-ls)))
+  (add-to-list 'lsp-language-id-configuration '(fennel-mode . "fennel"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "fennel-ls")
+                    :activation-fn (lsp-activate-on "fennel")
+                    :server-id 'fennel-ls)))
 
 ;;; Ren’Py ;;;
 (elpaca (renpy :host github :repo "Reagankm/renpy-mode"))
