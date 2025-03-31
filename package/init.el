@@ -85,7 +85,8 @@
  "gg" 'magit
  "gi" 'gitignore-templates-new-file
  "gI" 'gitignore-templates-insert
- "gb" 'magit-blame)
+ "gb" 'magit-blame
+ "gl" 'magit-log-buffer-file)
 
 (use-package company
   :init
