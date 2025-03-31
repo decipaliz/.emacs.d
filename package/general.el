@@ -4,12 +4,7 @@
   :init
   (general-auto-unbind-keys)
   (general-create-definer tyrant-def
-    :keymaps '(normal insert visual motion emacs)
-    :prefix "SPC"
-    :global-prefix (kbd "C-c u"))
-  ;; (general-create-definer tyrant-def
-  ;;   :prefix (kbd "C-c u"))
-  )
+    :prefix (kbd "C-z")))
 
 (def!
  "x" 'shell-command
