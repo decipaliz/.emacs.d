@@ -66,17 +66,4 @@
                           (kill-buffer (buffer-name buf))))))
 
  "SPC" '("M-x" . execute-extended-command)
- "C-SPC" '("M-x" . execute-extended-command)
-
- "wh" 'evil-window-left
- "wj" 'evil-window-down
- "wk" 'evil-window-up
- "wl" 'evil-window-right
- "wd" 'evil-window-delete
- "wD" 'kill-buffer-and-window
- "w=" 'evil-window-increase-height
- "w-" 'evil-window-decrease-height
- "w," 'evil-window-decrease-width
- "w." 'evil-window-increase-width
- "ws" 'evil-window-split
- "wv" 'evil-window-vsplit)
+ "C-SPC" '("M-x" . execute-extended-command))

@@ -5,22 +5,13 @@
   (setq elpaca-use-package-by-default t))
 (elpaca-wait)
 
-(setq evil-want-keybinding nil)
-(setq evil-undo-system 'undo-redo)
-(use-package evil
+(setq god-mode-enable-function-key-translation nil)
+(use-package god-mode
   :init
-  (evil-mode 1))
-(use-package evil-collection
-  :init
-  (setq evil-want-integration t)
-  (evil-collection-init))
-
-;; (setq god-mode-enable-function-key-translation nil)
-;; (use-package god-mode
-;;   :init
-;;   (god-mode))
-;; (global-set-key (kbd "<escape>") #'god-mode-all)
-;; (define-key god-local-mode-map (kbd ".") #'repeat)
+  (god-mode)
+  :config
+  (global-set-key (kbd "<escape>") #'god-mode-all)
+  (define-key god-local-mode-map (kbd ".") #'repeat))
 
 (load! package/general)
 
@@ -51,10 +42,8 @@
         which-key-idle-secondary-delay 0.01
         which-key-max-description-length 32
         which-key-sort-order 'which-key-key-order-alpha)
-  (setq which-key-allow-evil-operators t)
   (which-key-mode +1)
-  ;; (which-key-enable-god-mode-support)
-  )
+  (which-key-enable-god-mode-support))
 
 (use-package vterm
   :init
@@ -90,8 +79,7 @@
 
 (use-package company
   :init
-  (global-company-mode +1)
-  (define-key evil-insert-state-map (kbd "TAB") 'company-indent-or-complete-common))
+  (global-company-mode +1))
 
 (use-package lsp-mode
   :init
@@ -192,7 +180,6 @@
 ;;     (interactive)
 ;;     (dired org-roam-directory))
 ;;   (org-roam-db-autosync-enable))
-(use-package evil-org)
 (def! "r" (cons "roam" (make-sparse-keymap))
       "rl" 'org-roam-buffer-toggle
       "rf" 'org-roam-node-find
@@ -219,8 +206,6 @@
   (setq centaur-tabs-show-new-tab-button nil)
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-cycle-scope 'tabs)
-  (define-key evil-normal-state-map (kbd "g t") 'centaur-tabs-forward)
-  (define-key evil-normal-state-map (kbd "g T") 'centaur-tabs-backward)
   (centaur-tabs-mode t))
 (def!
  "TAB" 'centaur-tabs-forward
