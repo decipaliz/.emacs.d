@@ -187,12 +187,6 @@
       "ro" 'org-open-at-point
       "rd" 'rc/open-roam-dir)
 
-;; (use-package elcord
-;;   :init
-;;   (setq elcord-display-buffer-details nil)
-;;   (setq elcord-show-small-icon nil)
-;;   (setq elcord-idle-timer 604800))
-
 (use-package paredit)
 (use-package rainbow-delimiters)
 
@@ -235,12 +229,6 @@
   (let ((name (format "%s" tab)))
     (not (cl-some (lambda (x) (string-prefix-p x name)) centaur-tabs-blacklist))))
 ;; TODO: create groups by keybind, each new buffer adds to current group instead of automatic grouping
-
-;; (use-package treemacs)
-;; (use-package treemacs-evil)
-;; (def!
-;;  "e" 'treemacs
-;;  "E" 'treemacs-select-directory)
 
 (load! package/lang)
 
