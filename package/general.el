@@ -6,10 +6,7 @@
   (general-create-definer tyrant-def
     :keymaps '(normal insert visual motion emacs)
     :prefix "SPC"
-    :global-prefix (kbd "C-c u"))
-  ;; (general-create-definer tyrant-def
-  ;;   :prefix (kbd "C-c u"))
-  )
+    :global-prefix (kbd "C-c u")))
 
 (def!
  "x" 'shell-command

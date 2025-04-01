@@ -15,13 +15,6 @@
   (setq evil-want-integration t)
   (evil-collection-init))
 
-;; (setq god-mode-enable-function-key-translation nil)
-;; (use-package god-mode
-;;   :init
-;;   (god-mode))
-;; (global-set-key (kbd "<escape>") #'god-mode-all)
-;; (define-key god-local-mode-map (kbd ".") #'repeat)
-
 (load! package/general)
 
 (use-package exec-path-from-shell
@@ -52,9 +45,7 @@
         which-key-max-description-length 32
         which-key-sort-order 'which-key-key-order-alpha)
   (setq which-key-allow-evil-operators t)
-  (which-key-mode +1)
-  ;; (which-key-enable-god-mode-support)
-  )
+  (which-key-mode +1))
 
 (use-package vterm
   :init
@@ -200,12 +191,6 @@
       "ro" 'org-open-at-point
       "rd" 'rc/open-roam-dir)
 
-;; (use-package elcord
-;;   :init
-;;   (setq elcord-display-buffer-details nil)
-;;   (setq elcord-show-small-icon nil)
-;;   (setq elcord-idle-timer 604800))
-
 (use-package paredit)
 (use-package rainbow-delimiters)
 
@@ -250,12 +235,6 @@
   (let ((name (format "%s" tab)))
     (not (cl-some (lambda (x) (string-prefix-p x name)) centaur-tabs-blacklist))))
 ;; TODO: create groups by keybind, each new buffer adds to current group instead of automatic grouping
-
-;; (use-package treemacs)
-;; (use-package treemacs-evil)
-;; (def!
-;;  "e" 'treemacs
-;;  "E" 'treemacs-select-directory)
 
 (load! package/lang)
 
