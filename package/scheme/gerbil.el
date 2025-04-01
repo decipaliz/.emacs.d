@@ -32,9 +32,9 @@
         #'enable-paredit-mode #'rainbow-delimiters-mode
         (lambda ()
           (tyrant-def
-            "c" (cons "scheme" (make-sparse-keymap))
-            "cg" (cons "gerbil" (make-sparse-keymap))
-            "cgs" 'gerbil-setup-buffers)))
+            "C-c" (cons "scheme" (make-sparse-keymap))
+            "C-c C-s" (cons "gerbil" (make-sparse-keymap))
+            "C-c C-c C-s" 'gerbil-setup-buffers)))
 
 (hooks! gerbil-mode-hook
         #'hs-minor-mode
@@ -44,14 +44,14 @@
           (when (file-exists-p "~/.gerbil/pkg/TAGS") (visit-tags-table "~/.gerbil/pkg/TAGS")))
         (lambda ()
           (tyrant-def
-            "c" (cons "scheme" (make-sparse-keymap))
-            "cg" (cons "gerbil" (make-sparse-keymap))
-            "cgi" 'gerbil-import-current-buffer
-            "cgr" 'gerbil-reload-current-buffer
-            "cgc" 'gerbil-compile-current-buffer
-            "cgb" 'gerbil-build
-            "cgs" 'gerbil-setup-buffers
-            "cc" (cons "comint" (make-sparse-keymap))
-            "ccn" 'comint-next-input
-            "ccp" 'comint-previous-input
-            "ccl" 'clear-comint-buffer)))
+            "C-c" (cons "scheme" (make-sparse-keymap))
+            "C-c C-c" (cons "gerbil" (make-sparse-keymap))
+            "C-c C-c C-i" 'gerbil-import-current-buffer
+            "C-c C-c C-r" 'gerbil-reload-current-buffer
+            "C-c C-c C-c" 'gerbil-compile-current-buffer
+            "C-c C-c C-b" 'gerbil-build
+            "C-c C-c C-s" 'gerbil-setup-buffers
+            "C-c C-m" (cons "comint" (make-sparse-keymap))
+            "C-c C-m C-n" 'comint-next-input
+            "C-c C-m C-p" 'comint-previous-input
+            "C-c C-m C-l" 'clear-comint-buffer)))

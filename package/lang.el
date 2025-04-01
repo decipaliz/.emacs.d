@@ -20,12 +20,12 @@
           (#'hs-minor-mode #'lsp #'prettier-js-mode
                            (lambda ()
                              (tyrant-def
-                               "c" (cons "javascript" (make-sparse-keymap))
-                               "cd" 'jsdoc
-                               "cl" (cons "lorem" (make-sparse-keymap))
-                               "cll" #'lorem-ipsum-insert-paragraphs
-                               "cls" #'lorem-ipsum-insert-sentences
-                               "cli" #'lorem-ipsum-insert-list))))
+                               "C-c" (cons "javascript" (make-sparse-keymap))
+                               "C-c C-d" 'jsdoc
+                               "C-c C-l" (cons "lorem" (make-sparse-keymap))
+                               "C-c C-l C-l" #'lorem-ipsum-insert-paragraphs
+                               "C-c C-l C-s" #'lorem-ipsum-insert-sentences
+                               "C-c C-l C-i" #'lorem-ipsum-insert-list))))
 
 ;;; PHP ;;;
 (use-package php-mode)
@@ -36,8 +36,8 @@
         #'lsp
         (lambda ()
           (tyrant-def
-            "c" (cons "java" (make-sparse-keymap))
-            "cg" #'gradle-list-run-task)))
+            "C-c" (cons "java" (make-sparse-keymap))
+            "C-c C-r" #'gradle-list-run-task)))
 (use-package hydra)
 (use-package lsp-java)
 
@@ -58,17 +58,17 @@
         #'lsp
         (lambda ()
           (tyrant-def
-            "c" (cons "rust" (make-sparse-keymap))
-            "cc" (cons "cargo" (make-sparse-keymap))
-            "ccf" 'rustic-cargo-fmt
-            "cca" 'rustic-cargo-add
-            "cci" 'rustic-cargo-init
-            "cct" 'rustic-cargo-test
-            "ccr" 'rustic-cargo-run
-            "cp" 'rustic-popup
-            "cr" 'rustic-reload
-            "cC" 'rustic-compile
-            "cf" 'rustic-format-buffer)))
+            "C-c" (cons "rust" (make-sparse-keymap))
+            "C-c C-c" (cons "cargo" (make-sparse-keymap))
+            "C-c C-c C-f" 'rustic-cargo-fmt
+            "C-c C-c C-a" 'rustic-cargo-add
+            "C-c C-c C-i" 'rustic-cargo-init
+            "C-c C-c C-t" 'rustic-cargo-test
+            "C-c C-c C-r" 'rustic-cargo-run
+            "C-c C-p" 'rustic-popup
+            "C-c C-r" 'rustic-reload
+            "C-c C-S-C" 'rustic-compile
+            "C-c C-f" 'rustic-format-buffer)))
 
 ;;; Clojure ;;;
 (use-package cider
@@ -76,15 +76,15 @@
   (hooks! clojure-mode-hook
           (lambda ()
             (tyrant-def
-              "c" (cons "clojure" (make-sparse-keymap))
-              "cc" (cons "cider" (make-sparse-keymap))
-              "ccj" 'cider-jack-in
-              "cce" (cons "eval" (make-sparse-keymap))
-              "cceb" 'cider-load-buffer
-              "ccef" 'cider-load-all-files
-              "ccec" 'cider-eval-defun-to-comment
-              "ccee" 'cider-eval-defun-at-point
-              "cct" (cons "test" 'cider-test-commands-map))))
+              "C-c" (cons "clojure" (make-sparse-keymap))
+              "C-c C-c" (cons "cider" (make-sparse-keymap))
+              "C-c C-c C-j" 'cider-jack-in
+              "C-c C-c C-e" (cons "eval" (make-sparse-keymap))
+              "C-c C-c C-e C-b" 'cider-load-buffer
+              "C-c C-c C-e C-f" 'cider-load-all-files
+              "C-c C-c C-e C-c" 'cider-eval-defun-to-comment
+              "C-c C-c C-e C-e" 'cider-eval-defun-at-point
+              "C-c C-c C-t" (cons "test" 'cider-test-commands-map))))
   (rhooks! (clojure-mode-hook cider-mode-hook)
 	   (#'hs-minor-mode #'lsp #'enable-paredit-mode #'rainbow-delimiters-mode)))
 
@@ -112,11 +112,11 @@
 (hooks! web-mode-hook
         (lambda ()
           (tyrant-def
-            "c" (cons "web" (make-sparse-keymap))
-            "cl" (cons "lorem" (make-sparse-keymap))
-            "cll" #'lorem-ipsum-insert-paragraphs
-            "cls" #'lorem-ipsum-insert-sentences
-            "cli" #'lorem-ipsum-insert-list)))
+            "C-c" (cons "web" (make-sparse-keymap))
+            "C-c C-l" (cons "lorem" (make-sparse-keymap))
+            "C-c C-l C-l" #'lorem-ipsum-insert-paragraphs
+            "C-c C-l C-s" #'lorem-ipsum-insert-sentences
+            "C-c C-l C-i" #'lorem-ipsum-insert-list)))
 
 ;;; CSS ;;;
 (rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp))
@@ -152,52 +152,50 @@
 (hooks! lisp-mode-hook
         #'hs-minor-mode
         (lambda ()
-          (local-set-key (kbd "C-\\") (lambda () (interactive) (insert "λ")))
           (tyrant-def
-            "c" (cons "lisp" (make-sparse-keymap))
-            "cs" 'sly
-            "cr" 'sly-restart-inferior-lisp
-            "ca" 'sly-apropos
-            "ck" 'sly-thread-kill
-            "cc" 'sly-mrepl-clear-repl
+            "C-c" (cons "lisp" (make-sparse-keymap))
+            "C-c C-s" 'sly
+            "C-c C-r" 'sly-restart-inferior-lisp
+            "C-c C-a" 'sly-apropos
+            "C-c C-k" 'sly-thread-kill
+            "C-c C-c" 'sly-mrepl-clear-repl
 
-            "ce" (cons "eval" (make-sparse-keymap))
-            "cee" 'sly-eval-last-expression
-            "ceb" 'sly-eval-buffer
-            "cer" 'sly-eval-region
-            "cem" 'sly-eval-macroexpand
+            "C-c C-e" (cons "eval" (make-sparse-keymap))
+            "C-c C-e C-e" 'sly-eval-last-expression
+            "C-c C-e C-b" 'sly-eval-buffer
+            "C-c C-e C-r" 'sly-eval-region
+            "C-c C-e C-m" 'sly-eval-macroexpand
 
-            "ch" (cons "help" (make-sparse-keymap))
-            "chs" 'sly-describe-symbol
-            "chd" 'sly-documentation
-            "chh" 'sly-documentation-lookup
+            "C-c C-h" (cons "help" (make-sparse-keymap))
+            "C-c C-h C-s" 'sly-describe-symbol
+            "C-c C-h C-d" 'sly-documentation
+            "C-c C-h C-h" 'sly-documentation-lookup
 
-            "cm" (cons "macroexpand" (make-sparse-keymap))
-            "cmm" 'sly-macroexpand-1
-            "cmM" 'sly-macroexpand-all
-            "cmi" 'sly-macroexpand-1-inplace
-            "cmI" 'sly-macroexpand-all-inplace
-            "cma" 'sly-macroexpand-again
-            "cmu" 'sly-macroexpand-undo)))
+            "C-c C-m" (cons "macroexpand" (make-sparse-keymap))
+            "C-c C-m C-m" 'sly-macroexpand-1
+            "C-c C-m C-S-M" 'sly-macroexpand-all
+            "C-c C-m C-i" 'sly-macroexpand-1-inplace
+            "C-c C-m C-S-I" 'sly-macroexpand-all-inplace
+            "C-c C-m C-a" 'sly-macroexpand-again
+            "C-c C-m C-u" 'sly-macroexpand-undo)))
 
 (hooks! sly-mode-hook
         (lambda ()
-          (local-set-key (kbd "M-RET") #'sly-mrepl-return)
-          (local-set-key (kbd "C-\\") (lambda () (interactive) (insert "λ")))))
+          (local-set-key (kbd "M-RET") #'sly-mrepl-return)))
 
 ;;; Racket ;;;
 (use-package racket-mode)
 (hooks! racket-mode-hook #'enable-paredit-mode #'rainbow-delimiters-mode
         (lambda ()
           (tyrant-def
-            "c" (cons "racket" (make-sparse-keymap))
-            "cr" (cons "run" (make-sparse-keymap))
-            "crr" 'racket-run-and-switch-to-repl
-            "crt" 'racket-test
-            "crR" 'racket-racket
-            "ch" (cons "help" (make-sparse-keymap))
-            "chh" 'racket-repl-describe
-            "chd" 'racket-documentation-search)))
+            "C-c" (cons "racket" (make-sparse-keymap))
+            "C-c C-r" (cons "run" (make-sparse-keymap))
+            "C-c C-r C-r" 'racket-run-and-switch-to-repl
+            "C-c C-r C-t" 'racket-test
+            "C-c C-r C-R" 'racket-racket
+            "C-c C-h" (cons "help" (make-sparse-keymap))
+            "C-c C-h C-h" 'racket-repl-describe
+            "C-c C-h C-d" 'racket-documentation-search)))
 
 ;;; Scheme ;;;
 ;; (load! package/scheme/chez)
@@ -211,7 +209,7 @@
 (hooks! haskell-mode-hook #'hs-minor-mode #'lsp
         (lambda ()
           (tyrant-def
-            "c" (cons "haskell" (make-sparse-keymap)))))
+            "C-c" (cons "haskell" (make-sparse-keymap)))))
 
 ;;; Docker ;;;
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode))

@@ -57,10 +57,10 @@
   (yas-global-mode +1))
 (use-package yasnippet-snippets)
 (def!
- "y" (cons "yasnippet" (make-sparse-keymap))
- "yn" 'yas-new-snippet
- "ys" 'yas-insert-snippet
- "yv" 'yas-visit-snippet-file)
+ "C-y" (cons "yasnippet" (make-sparse-keymap))
+ "C-y C-n" 'yas-new-snippet
+ "C-y C-s" 'yas-insert-snippet
+ "C-y C-v" 'yas-visit-snippet-file)
 
 (use-package transient)
 (use-package magit)
@@ -100,30 +100,30 @@
   (hooks! flycheck-mode-hook
           (lambda ()
             (tyrant-def
-              "1" (cons "flycheck" (make-sparse-keymap))
-              "1 C-c" 'flycheck-compile
-              "1 C-w" 'flycheck-copy-errors-as-kill
-              "1?" 'flycheck-describe-checker
-              "1C" 'flycheck-clear
-              "1H" 'display-local-help
-              "1V" 'flycheck-version
-              "1c" 'flycheck-buffer
-              "1e" 'flycheck-explain-error-at-point
-              "1h" 'flycheck-display-error-at-point
-              "1i" 'flycheck-manual
-              "1l" 'flycheck-list-errors
-              "1n" 'flycheck-next-error
-              "1p" 'flycheck-previous-error
-              "1s" 'flycheck-select-checker
-              "1v" 'flycheck-verify-setup
-              "1x" 'flycheck-disable-checker))))
+              "C-1" (cons "flycheck" (make-sparse-keymap))
+              "C-1 C-c" 'flycheck-compile
+              "C-1 C-w" 'flycheck-copy-errors-as-kill
+              "C-1 C-?" 'flycheck-describe-checker
+              "C-1 C-S-C" 'flycheck-clear
+              "C-1 C-S-H" 'display-local-help
+              "C-1 C-S-V" 'flycheck-version
+              "C-1 C-c" 'flycheck-buffer
+              "C-1 C-e" 'flycheck-explain-error-at-point
+              "C-1 C-h" 'flycheck-display-error-at-point
+              "C-1 C-i" 'flycheck-manual
+              "C-1 C-l" 'flycheck-list-errors
+              "C-1 C-n" 'flycheck-next-error
+              "C-1 C-p" 'flycheck-previous-error
+              "C-1 C-s" 'flycheck-select-checker
+              "C-1 C-v" 'flycheck-verify-setup
+              "C-1 C-x" 'flycheck-disable-checker))))
 
 (use-package projectile
   :init
   (projectile-mode +1))
 (def!
- "p" (cons "projectile" 'projectile-command-map)
- "pa" 'projectile-add-known-project)
+ "C-p" (cons "projectile" 'projectile-command-map)
+ "C-p C-a" 'projectile-add-known-project)
 
 (use-package rg)
 
@@ -180,12 +180,12 @@
     (interactive)
     (dired org-roam-directory))
   (org-roam-db-autosync-enable))
-(def! "r" (cons "roam" (make-sparse-keymap))
-      "rl" 'org-roam-buffer-toggle
-      "rf" 'org-roam-node-find
-      "ri" 'org-roam-node-insert
-      "ro" 'org-open-at-point
-      "rd" 'rc/open-roam-dir)
+(def! "C-r" (cons "roam" (make-sparse-keymap))
+      "C-r C-l" 'org-roam-buffer-toggle
+      "C-r C-f" 'org-roam-node-find
+      "C-r C-i" 'org-roam-node-insert
+      "C-r C-o" 'org-open-at-point
+      "C-r C-d" 'rc/open-roam-dir)
 
 (use-package paredit)
 (use-package rainbow-delimiters)
@@ -202,10 +202,10 @@
   (setq centaur-tabs-cycle-scope 'tabs)
   (centaur-tabs-mode t))
 (def!
- "TAB" 'centaur-tabs-forward
- "<backtab>" 'centaur-tabs-backward
- "C-<tab>" 'centaur-tabs-toggle-groups
- "C-<iso-lefttab>" 'centaur-tabs-local-mode)
+ "C-<tab>" 'centaur-tabs-forward
+ "C-<iso-lefttab>" 'centaur-tabs-backward
+ "TAB" 'centaur-tabs-toggle-groups
+ "<backtab>" 'centaur-tabs-local-mode)
 (defvar centaur-tabs-blacklist '("*epc"
                                  "*helm"
                                  "*Helm"
