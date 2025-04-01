@@ -200,10 +200,11 @@
   (setq centaur-tabs-show-new-tab-button nil)
   (setq centaur-tabs-set-modified-marker t)
   (setq centaur-tabs-cycle-scope 'tabs)
-  (centaur-tabs-mode t))
+  (centaur-tabs-mode t)
+  :config
+  (global-set-key (kbd "C-<tab>") #'centaur-tabs-forward)
+  (global-set-key (kbd "C-<iso-lefttab>") #'centaur-tabs-backward))
 (def!
- "C-<tab>" 'centaur-tabs-forward
- "C-<iso-lefttab>" 'centaur-tabs-backward
  "TAB" 'centaur-tabs-toggle-groups
  "<backtab>" 'centaur-tabs-local-mode)
 (defvar centaur-tabs-blacklist '("*epc"
