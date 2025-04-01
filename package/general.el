@@ -7,58 +7,28 @@
     :prefix (kbd "C-z")))
 
 (def!
- "x" 'shell-command
- "X" 'async-shell-command
+ "C-9" 'insert-parentheses
 
- "9" 'insert-parentheses
- "/" 'comment-line
+ "C-b" (cons "buffers" (make-sparse-keymap))
+ "C-b C-d" 'kill-current-buffer
+ "C-b C-b" 'ibuffer
 
- "b" (cons "buffers" (make-sparse-keymap))
- "bd" 'kill-current-buffer
- "bb" 'switch-to-buffer
- "bj" 'next-buffer
- "bk" 'previous-buffer
- "br" 'revert-buffer-quick
- "bm" 'ibuffer
- "bs" 'save-some-buffers
+ "C-o" (cons "launchers" (make-sparse-keymap))
+ "C-o C-e" 'eshell
+ "C-o C-p" 'list-processes
+ "C-o C-i" 'ielm
+ "C-o C-s" 'scratch-buffer
+ "C-o C-w" 'whitespace-mode
 
- "w" (cons "windows" (make-sparse-keymap))
- "wo" 'other-window
- "wO" 'delete-other-windows
- "wb" 'balance-windows
-
- "f" (cons "dired" (make-sparse-keymap))
- "ff" 'find-file
- "fs" 'save-buffer
- "fd" 'dired
-
- "o" (cons "launchers" (make-sparse-keymap))
- "oe" 'eshell
- "op" 'list-processes
- "oi" 'ielm
- "os" 'scratch-buffer
-
- "m" (cons "minor mode" (make-sparse-keymap))
- "mw" 'whitespace-mode
-
- "h" (cons "describe" (make-sparse-keymap))
- "hv" 'describe-variable
- "hf" 'describe-function
- "hm" 'describe-mode
- "hk" 'describe-key
-
- "q" (cons "emacs" (make-sparse-keymap))
- "qq" 'delete-frame
- "qk" 'save-buffers-kill-emacs
- "qK" 'kill-emacs
- "qr" (cons "reset" (lambda ()
+ "C-q" (cons "emacs" (make-sparse-keymap))
+ "C-q C-q" 'delete-frame
+ "C-q C-k" 'save-buffers-kill-emacs
+ "C-q C-S-K" 'kill-emacs
+ "C-q C-r" (cons "reset" (lambda ()
                       (interactive)
                       (scratch-buffer)
                       (delete-other-windows)
                       (delete-other-frames)
                       (dolist (buf (buffer-list))
                         (unless (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
-                          (kill-buffer (buffer-name buf))))))
-
- "SPC" '("M-x" . execute-extended-command)
- "C-SPC" '("M-x" . execute-extended-command))
+                          (kill-buffer (buffer-name buf)))))))
