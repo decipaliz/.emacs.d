@@ -175,14 +175,14 @@
   :init
   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●"))
   (hooks! org-mode-hook #'org-bullets-mode))
-;; (use-package org-roam
-;;   :init
-;;   (setq org-roam-directory "~/dev/roam")
-;;   (setq org-roam-db-location "~/dev/roam/org-roam.db")
-;;   (defun rc/open-roam-dir ()
-;;     (interactive)
-;;     (dired org-roam-directory))
-;;   (org-roam-db-autosync-enable))
+(use-package org-roam
+  :init
+  (setq org-roam-directory "~/roam")
+  (setq org-roam-db-location "~/roam/org-roam.db")
+  (defun rc/open-roam-dir ()
+    (interactive)
+    (dired org-roam-directory))
+  (org-roam-db-autosync-enable))
 (use-package evil-org)
 (def! "r" (cons "roam" (make-sparse-keymap))
       "rl" 'org-roam-buffer-toggle
