@@ -48,7 +48,7 @@
 (use-package vterm
   :init
   (hooks! vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
-(def! "`" 'vterm)
+(def! "C-`" 'vterm)
 
 (use-package yasnippet
   :init
@@ -122,8 +122,8 @@
   :init
   (projectile-mode +1))
 (def!
- "C-p" (cons "projectile" 'projectile-command-map)
- "C-p C-a" 'projectile-add-known-project)
+ "p" (cons "projectile" 'projectile-command-map)
+ "pa" 'projectile-add-known-project)
 
 (use-package rg)
 
