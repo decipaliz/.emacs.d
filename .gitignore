@@ -38,3 +38,4 @@ racket-mode/
 url/
 lsp-cache/
 bin/.pid
+bookmarks
