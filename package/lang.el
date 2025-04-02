@@ -1,5 +1,10 @@
 ;; -*- lexical-binding: t -*-
 
+(hooks! hs-minor-mode-hook
+        (lambda ()
+          (tyrant-def
+            "C-f" #'hs-toggle-hiding)))
+
 ;;; C ;;;
 (use-package cmake-mode)
 (rlhooks! (c-mode-hook c++-mode-hook) (#'lsp #'hs-minor-mode))
