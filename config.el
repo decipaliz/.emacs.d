@@ -36,5 +36,7 @@
 
 (setq-default cursor-type 'bar)
 
+(global-set-key (kbd "C-/") 'undo-only)
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file t t)
