@@ -49,6 +49,10 @@
   :init
   (hooks! vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
 (def! "C-`" 'vterm)
+(use-package vterm-toggle
+  :config
+  (global-set-key (kbd "C-`") #'vterm-toggle)
+  (global-set-key (kbd "C-~") #'vterm-toggle-cd))
 
 (use-package yasnippet
   :init
