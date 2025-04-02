@@ -11,6 +11,7 @@
   (god-mode)
   :config
   (global-set-key (kbd "<escape>") #'god-mode-all)
+  (global-set-key (kbd "C-<escape>") #'god-mode-all)
   (define-key god-local-mode-map (kbd ".") #'repeat))
 
 (load! package/general)
