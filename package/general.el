@@ -39,9 +39,7 @@
  "op" 'list-processes
  "oi" 'ielm
  "os" 'scratch-buffer
-
- "m" (cons "minor mode" (make-sparse-keymap))
- "mw" 'whitespace-mode
+ "ow" 'whitespace-mode
 
  "h" (cons "describe" (make-sparse-keymap))
  "hv" 'describe-variable
