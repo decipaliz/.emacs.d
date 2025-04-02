@@ -31,4 +31,7 @@
                       (delete-other-frames)
                       (dolist (buf (buffer-list))
                         (unless (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
-                          (kill-buffer (buffer-name buf)))))))
+                          (kill-buffer (buffer-name buf))))))
+
+ "C-," 'beginning-of-buffer
+ "C-." 'end-of-buffer)
