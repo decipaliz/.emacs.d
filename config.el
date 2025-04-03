@@ -34,8 +34,6 @@
 (setq display-line-numbers-type 'relative)
 (global-display-line-numbers-mode)
 
-(setq-default cursor-type 'bar)
-
 (global-set-key (kbd "C-/") 'undo-only)
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))

@@ -9,10 +9,15 @@
 (use-package god-mode
   :init
   (god-mode)
+  :hook (post-command-hook . (lambda ()
+                               (setq cursor-type
+                                     (if (and god-local-mode (not (god-exempt-mode-p))) 'box 'bar))))
   :config
   (global-set-key (kbd "<escape>") #'god-mode-all)
   (global-set-key (kbd "C-<escape>") #'god-mode-all)
-  (define-key god-local-mode-map (kbd ".") #'repeat))
+  (define-key god-local-mode-map (kbd ".") #'repeat)
+
+  (add-to-list 'god-exempt-major-modes 'vterm-mode))
 
 (load! package/general)
 
@@ -137,6 +142,7 @@
 (use-package all-the-icons)
 (use-package doom-modeline
   :init
+  (setq doom-modeline-modal nil)
   (doom-modeline-mode 1))
 
 (use-package hl-todo
