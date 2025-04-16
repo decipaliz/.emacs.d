@@ -21,6 +21,7 @@
 (electric-pair-mode)
 (electric-indent-mode)
 (electric-quote-mode)
+(delete-selection-mode +1)
 
 (add-to-list 'default-frame-alist '(alpha . 95))
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
