@@ -136,7 +136,11 @@
  "p" (cons "projectile" 'projectile-command-map)
  "pa" 'projectile-add-known-project)
 
-(use-package rg)
+(use-package rg
+  :config
+  (setq rg-command-line-flags '("-."))
+  (setq rg-ignore-case 'smart))
+(def! "C-s" 'rg)
 
 (use-package nerd-icons)
 (use-package all-the-icons)
