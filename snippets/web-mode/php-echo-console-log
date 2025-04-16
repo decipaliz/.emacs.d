@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: php echo console log
+# key: console
+# --
+echo '<script>console.log(`[DEBUG] ' . print_r($0, true) . '`);</script>';
