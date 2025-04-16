@@ -219,3 +219,9 @@
 ;;; Docker ;;;
 (add-to-list 'auto-mode-alist '("Dockerfile\\'" . dockerfile-ts-mode))
 (use-package docker-compose-mode)
+
+;;; Vue ;;;
+(use-package vue-mode
+  :mode "\\.vue\\'"
+  :config
+  (add-hook 'vue-mode-hook #'lsp))
