@@ -146,7 +146,7 @@
 (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc emacs-lisp))
 (use-package sly
   :init
-  (setq inferior-lisp-program "ros run"))
+  (setq inferior-lisp-program "sbcl"))
 (rlhooks! (emacs-lisp-mode-hook
            eval-expression-minibuffer-setup-hook
            ielm-mode-hook
