@@ -35,3 +35,5 @@
 
  "C-," 'beginning-of-buffer
  "C-." 'end-of-buffer)
+
+(bind-key (kbd "C-\\") #'insert-lambda)
