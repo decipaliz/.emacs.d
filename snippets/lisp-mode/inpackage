@@ -2,4 +2,4 @@
 # name: inpackage
 # key: inp
 # --
-(in-package :${1:cl-user})
+(in-package #:${1:cl-user})

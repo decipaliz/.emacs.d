@@ -2,8 +2,8 @@
 # name: defpackage
 # key: defp
 # --
-(in-package :${1:cl-user})
-(defpackage :${2:name}
-  (:use :cl)
+(in-package #:${1:cl-user})
+(defpackage #:${2:name}
+  (:use #:cl)
   (:export${3:}))
-(in-package :$2)
+(in-package #:$2)
