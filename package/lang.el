@@ -206,7 +206,8 @@
 ;; (load! package/scheme/chez)
 ;; (load! package/scheme/chicken)
 ;; (load! package/scheme/gambit)
-;; (load! package/scheme/gerbil)
+(load! package/scheme/gerbil)
+;; (load! package/scheme/guile)
 
 ;;; Haskell ;;;
 (use-package haskell-mode)

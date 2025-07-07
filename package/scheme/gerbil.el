@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
-(add-to-list 'load-path "/usr/local/Gambit/share/emacs/site-lisp")
+(add-to-list 'load-path "/opt/gerbil/current/share/emacs/site-lisp")
 (require 'gambit)
 (defvar gerbil-program-name (expand-file-name "/opt/gerbil/bin/gxi"))
 (setq scheme-program-name gerbil-program-name)
