@@ -34,7 +34,9 @@
 
 ;;; PHP ;;;
 (use-package php-mode)
-(hooks! php-mode-hook #'hs-minor-mode)
+(hooks! php-mode-hook #'hs-minor-mode #'lsp)
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]bitrix\\'"))
 
 ;;; Java ;;;
 (hooks! java-mode-hook #'hs-minor-mode
@@ -114,7 +116,9 @@
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (hooks! web-mode-hook
+        #'lsp
         (lambda ()
           (tyrant-def
             "C-c" (cons "web" (make-sparse-keymap))
