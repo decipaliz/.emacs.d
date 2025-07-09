@@ -85,7 +85,13 @@
  "gi" 'gitignore-templates-new-file
  "gI" 'gitignore-templates-insert
  "gb" 'magit-blame
- "gl" 'magit-log-buffer-file)
+ "gl" 'magit-log-buffer-file
+
+ "C-x" (cons "merge" (make-sparse-keymap))
+ "C-x C-n" 'smerge-next
+ "C-x C-p" 'smerge-prev
+ "C-x C-u" 'smerge-keep-upper
+ "C-x C-l" 'smerge-keep-lower)
 
 (use-package company
   :init
