@@ -128,7 +128,7 @@
             "C-c C-l C-i" #'lorem-ipsum-insert-list)))
 
 ;;; CSS ;;;
-(rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp))
+(rlhooks! (css-mode-hook scss-mode-hook) (#'hs-minor-mode #'lsp #'prettier-js-mode))
 
 ;;; Fennel ;;;
 (elpaca (fennel-mode :repo "https://git.sr.ht/~technomancy/fennel-mode"))
