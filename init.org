@@ -1,0 +1,803 @@
+#+TITLE: My GNU Emacs configuration
+#+AUTHOR: decipaliz
+#+PROPERTY: header-args :tangle init.el
+#+STARTUP: content
+
+* About
+
+This is my attempt at simplifying my existing GNU Emacs configuration that’s been used for several years. I’ve encountered that I tend to create many complex file structures inside of my configuration and also don’t document things as fervently as one would like.
+
+Both of these problems are addressed by using a configuration file in [[info:org#Top][Org mode]]. It lets you keep all settings in one file and naturally encourages you to document them. Even if the file might get very long, navigating it inside Org mode is simple and convenient.
+
+* Configuration
+
+This is an Org file which is [[info:org#Extracting Source Code][tangled]] into actual configuration. Whenever you see a source code block like this:
+
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
+It is usually tangled into =init.el=. But not every code block is tangled - some are marked with =:tangle no=.
+
+#+begin_src org :tangle no
+  ,#+begin_src emacs-lisp :tangle no
+    (defun greet (name) (message "Hello, %s!" name))
+  ,#+end_src
+#+end_src
+
+Sometimes it’s also needed to target =early-init.el= with tangling. In this case, =:tangle early-init.el= is set:
+
+#+begin_src emacs-lisp :tangle early-init.el
+;;; -*- lexical-binding: t -*-
+#+end_src
+
+** Automatic tangling of =init.org=
+
+You can use =C-c C-v t= to run =org-babel-tangle=. It extracts all code blocks and inserts them into =init.el= (and some into =early-init.el=). 
+
+Tangling the =init.org= file every time manually isn’t satisfactory. We can define a function and add it to =after-save-hook= to do it automatically every time =init.org= changes.
+
+#+begin_src emacs-lisp
+  (require 'org)
+
+  (defun rc/tangle-init-org ()
+    "Tangle the ‘init.org’ file into ‘init.el’ and byte-compile it."
+    (interactive)
+    ;; don't run prog-mode-hook when tangling
+    (let (prog-mode-hook)
+      (org-babel-tangle-file
+       (expand-file-name "init.org" user-emacs-directory))
+      (byte-compile-file
+       (expand-file-name "init.el" user-emacs-directory))
+      (message "init.org successfully tangled!")))
+
+  (add-hook 'after-save-hook
+            (lambda ()
+              (when (string-equal
+                     (buffer-file-name)
+                     (expand-file-name "init.org" user-emacs-directory))
+                (rc/tangle-init-org))))
+#+end_src
+
+** Startup performance
+
+#+begin_src emacs-lisp
+  (defun rc/display-startup-performance ()
+    "Display information about startup time."
+    (interactive)
+    (message "Emacs started in %.2fs."
+             (float-time (time-subtract after-init-time
+                                        before-init-time))))
+  (add-hook 'emacs-startup-hook #'rc/display-startup-performance)
+#+end_src
+
+An interesting piece of information I encountered online is the fact that you can improve startup time by setting =gc-cons-threshold= to a very large value during startup, and then setting it to a more sane value after startup. The values I’m going to use are =most-positive-fixnum= and =50mb= respectively.
+
+#+begin_src emacs-lisp :tangle early-init.el
+  (let ((file-name-handler-alist-old file-name-handler-alist))
+    (add-hook 'emacs-startup-hook
+              (lambda ()
+                (setq gc-cons-threshold (* 1024 1024 50))
+                (setq file-name-handler-alist
+                      file-name-handler-alist-old)))
+    (setq gc-cons-threshold most-positive-fixnum)
+    (setq file-name-handler-alist nil))
+  (setq inhibit-default-init t)
+#+end_src
+
+** UTF-8 as preferred coding system
+
+#+begin_src emacs-lisp
+  (set-language-environment "UTF-8")
+  (prefer-coding-system 'utf-8)
+#+end_src
+
+** Some variable defaults
+
+#+begin_src emacs-lisp
+  (setq auto-revert-interval 1
+        create-lockfiles nil
+        enable-recursive-minibuffers t
+        inhibit-startup-screen t
+        initial-scratch-message nil
+        recentf-max-saved-items 10000
+        ring-bell-function 'ignore
+        display-line-numbers-type 'relative)
+#+end_src
+
+Some variables are local to buffers, so they should be changed with =setq-default=.
+
+#+begin_src emacs-lisp
+  (setq-default tab-width 4
+                fill-column 80
+                truncate-lines t
+                indent-tabs-mode nil
+                split-width-threshold 160
+                split-height-threshold nil)
+#+end_src
+
+** Yes or No
+
+I don’t like writing =yes= and =no= every time, so I prefer to use =y-or-n-p= function instead of =yes-or-no-p=.
+
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+
+** Default global modes
+
+These modes are global - meaning once they are enabled, they work by default in every buffer.
+
+#+begin_src emacs-lisp
+  (dolist (mode '(electric-pair-mode
+                  electric-indent-mode
+                  electric-quote-mode
+                  delete-selection-mode
+                  global-display-line-numbers-mode
+                  abbrev-mode
+                  recentf-mode
+                  savehist-mode))
+    (funcall mode 1))
+#+end_src
+
+** Appearance settings
+
+I prefer the Hack font, and I also prefer to use a fixed pitch font in place of variable pitch font too. You can download Hack Nerd Font from [[https://www.nerdfonts.com/font-downloads][Nerd Fonts]].
+
+#+begin_src emacs-lisp
+  (set-face-attribute 'default
+                      nil :font "Hack Nerd Font" :height 120)
+  (set-face-attribute 'fixed-pitch
+                      nil :font "Hack Nerd Font" :height 120)
+  (set-face-attribute 'variable-pitch
+                      nil :font "Hack Nerd Font" :height 120)
+#+end_src
+
+I also like my Emacs windows transparent, undecorated and maximized.
+
+#+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist '(alpha . 95))
+  (add-to-list 'default-frame-alist '(undecorated . t))
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+
+And of course, no menu, toolbar, scrollbar and blinking cursor.
+
+#+begin_src emacs-lisp
+  (dolist (mode '(menu-bar-mode
+                  tool-bar-mode
+                  scroll-bar-mode
+                  blink-cursor-mode))
+    (when (fboundp mode)
+      (funcall mode 0)))
+#+end_src
+
+** Custom file
+
+#+begin_src emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (add-hook 'after-init-hook
+            (lambda ()
+              (when (file-exists-p custom-file)
+                (load custom-file t t))))
+#+end_src
+
+** Autosave directory
+
+To avoid garbage in the filesystem, I prefer to place autosaves in a special directory.
+
+#+begin_src emacs-lisp
+  (defvar rc/autosave-directory
+    (expand-file-name "autosave/" user-emacs-directory)
+    "The directory where autosave files should be put.")
+
+  (setq backup-directory-alist
+        `((".*" . ,rc/autosave-directory))
+        auto-save-file-name-transforms
+        `((".*" ,rc/autosave-directory t)))
+#+end_src
+
+** Custom bindings
+
+I use a minor mode that has an associated keymap to hold all of my custom keybindings.
+
+#+begin_src emacs-lisp
+  (defvar rc/custom-bindings-map (make-sparse-keymap)
+    "Keymap for custom bindings.")
+  (define-minor-mode rc/custom-bindings-mode
+    "Minor mode that activates custom bindings."
+    :init-value t
+    :keymap rc/custom-bindings-map)
+#+end_src
+
+I prefer to use a sort of a leader key for my keybindings - this leader key is =C-z=. Since you can minimize Emacs by =C-x C-z=, I think this keybinding is free real estate for my own keybindings.
+
+#+begin_src emacs-lisp
+  (require 'bind-key)
+  (unbind-key "C-z")
+
+  (use-package emacs
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-z C-b C-d" . kill-current-buffer)
+                ("C-z C-b C-b" . ibuffer)
+
+                ("C-z C-o C-e" . eshell)
+                ("C-z C-o C-p" . list-processes)
+                ("C-z C-o C-i" . ielm)
+                ("C-z C-o C-s" . scratch-buffer)
+                ("C-z C-o C-w" . whitespace-mode)
+
+                ("C-z C-q C-q" . delete-frame)
+                ("C-z C-q C-k" . save-buffers-kill-emacs)
+                ("C-z C-q C-S-K" . kill-emacs)
+
+                ("C-z C-r" . recentf)
+                ("C-z C-f" . hs-toggle-hiding)))
+#+end_src
+
+I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel extremely awkward to me - I prefer to rebind them if possible.
+
+#+begin_src emacs-lisp
+  (use-package emacs
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-z C-," . beginning-of-buffer)
+                ("C-z C-." . end-of-buffer)))
+#+end_src
+
+** Custom functions
+
+Here I will define some functions I like to use in my configuration.
+
+*** =rc/reset=
+
+#+begin_src emacs-lisp
+  (defun rc/reset ()
+    "Reset all buffers, windows and frames."
+    (interactive)
+    (scratch-buffer)
+    (delete-other-windows)
+    (delete-other-frames)
+    (dolist (buf (buffer-list))
+      (unless (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
+        (kill-buffer (buffer-name buf)))))
+
+  (use-package emacs
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-z q r" . rc/reset)))
+#+end_src
+
+*** =rc/insert-lambda=
+
+#+begin_src emacs-lisp
+  (defun rc/insert-lambda ()
+    "Insert λ."
+    (interactive)
+    (insert-char 955 1))
+
+  (use-package emacs
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-\\" . rc/insert-lambda)))
+#+end_src
+
+* Packages
+
+I’m using Emacs’s built-in package manager since I’m trying to minimize the amount of extra dependencies (because there’s a *lot* of them in my older configuration). Thankfully, [[info:use-package#Top][use-package]] is integrated into Emacs since Emacs 29, so I can use this convenience without feeling bad about installing it.
+
+#+begin_src emacs-lisp
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+#+end_src
+
+I’m going to include [[https://melpa.org/#/getting-started][Melpa]] and Org mode’s archive in my =package-archives=.
+
+#+begin_src emacs-lisp
+  (require 'package)
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("org" . "https://orgmode.org/elpa/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+end_src
+
+** Bad Wolf theme
+
+#+begin_src emacs-lisp
+  (use-package badwolf-theme
+    :init
+    (load-theme 'badwolf t)
+    (add-hook 'minibuffer-setup-hook
+              (lambda ()
+                (make-local-variable 'face-remapping-alist)
+                (add-to-list 'face-remapping-alist
+                             '(highlight (:background "#45413b"))))))
+#+end_src
+
+** Modeline
+
+I was debating between using the default Emacs modeline and the Doom modeline and decided to use the [[https://github.com/rougier/nano-modeline][N Λ N O Modeline]] instead. Maybe I'll define my own modeline later to get rid of this package too.
+
+#+begin_src emacs-lisp
+  (use-package nano-modeline
+    :init
+    (setq-default mode-line-format nil)
+    :config
+    (nano-modeline-footer `((nano-modeline-buffer-status)
+                            " "
+                            (nano-modeline-buffer-name))
+                          `((nano-modeline-git-info)
+                            (nano-modeline-cursor-position)
+                            (nano-modeline-window-dedicated))
+                          1))
+#+end_src
+
+** exec-path-from-shell
+
+This enables environment variables from the shell inside Emacs.
+
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :config
+    (exec-path-from-shell-initialize))
+#+end_src
+
+** Magit
+
+The most important package by far.
+
+#+begin_src emacs-lisp
+  (use-package magit)
+  (use-package git-gutter)
+#+end_src
+
+** Projectile
+
+#+begin_src emacs-lisp
+  (use-package projectile
+    :init
+    (projectile-mode 1))
+#+end_src
+
+** Vertico
+
+Vertico seems like the most minimalist completion UI compared to Helm or Ivy.
+
+#+begin_src emacs-lisp
+  (use-package vertico
+    :init
+    (vertico-mode 1)
+    :config
+    (setq vertico-count 15))
+#+end_src
+
+I will also use Marginalia to annotate commands.
+
+#+begin_src emacs-lisp
+  (use-package marginalia
+    :init
+    (marginalia-mode 1))
+#+end_src
+
+** Completion
+
+I've decided to try out Corfu instead of Company.
+
+#+begin_src emacs-lisp
+  (use-package corfu
+    :commands corfu-popupinfo-mode
+    :init
+    (global-corfu-mode 1)
+    :config
+    (corfu-popupinfo-mode 1)
+    (setq corfu-cycle t))
+#+end_src
+
+I also use orderless to allow for completion based on regexps.
+
+#+begin_src emacs-lisp
+  (use-package orderless
+    :config
+    (setq completion-styles '(orderless basic partial-completion)
+          completion-category-overrides '((file (styles basic partial-completion)))
+          completion-category-defaults nil))
+#+end_src
+
+** Which key
+
+Despite using Emacs for quite a while, I still find this plugin extremely useful.
+
+#+begin_src emacs-lisp
+  (use-package which-key
+    :init
+    (which-key-mode +1)
+    :config
+    (setq which-key-idle-delay 0.4
+          which-key-idle-secondary-delay 0.01
+          which-key-max-description-length 32
+          which-key-sort-order 'which-key-key-order-alpha))
+#+end_src
+
+** Vterm
+
+As much as I would like to use [[info:eshell#Top][eshell]] for everything, vterm is unreplaceable.
+
+#+begin_src emacs-lisp
+  (use-package vterm
+    :init
+    (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
+#+end_src
+
+I also like to use vterm-toggle to open it quickly.
+
+#+begin_src emacs-lisp
+  (use-package vterm-toggle
+    :config
+    (global-set-key (kbd "C-`") #'vterm-toggle)
+    (global-set-key (kbd "C-~") #'vterm-toggle-cd))
+#+end_src
+
+** YASnippet
+
+I have been addicted to [[https://joaotavora.github.io/yasnippet/][YASnippet]] for quite a while now. Can't imagine using Emacs without it.
+
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :init
+    (yas-global-mode +1)
+    :config
+    (setq yas-nippet-dir (expand-file-name "snippets/" user-emacs-directory)))
+  (use-package yasnippet-snippets)
+#+end_src
+
+** ripgrep
+
+Despite Projectile having support of ripgrep, I still like to be able to manually search in directories using =rg=.
+
+#+begin_src emacs-lisp
+  (use-package rg
+    :config
+    (setq rg-command-line-flags '("-."))
+    (setq rg-ignore-case 'smart))
+#+end_src
+
+** Todos
+
+=hl-todo= is a simple package that highlights todos, as expected.
+
+#+begin_src emacs-lisp
+  (use-package hl-todo
+    :config
+    (global-hl-todo-mode 1))
+#+end_src
+
+* Language-specific packages and configurations
+
+I like to use a sort of a "local leader" for language-specific keybindings, this local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
+
+#+begin_src emacs-lisp
+    (defmacro rc/local-map (hook &rest pairs)
+      "Define a language-specific local map."
+      `(add-hook ',hook
+                 (lambda ()
+                   ,@(mapcar
+                      (lambda (pair)
+                        `(local-set-key (kbd ,(concat "C-z C-c " (car pair)))
+                                        #',(cdr pair)))
+                      pairs))))
+#+end_src
+
+** C/C++
+
+#+begin_src emacs-lisp
+  (use-package cmake-mode)
+  (use-package c-mode
+    :ensure nil
+    :hook ((c-mode . hs-minor-mode)
+           (c-mode . eglot)))
+  (use-package c++-mode
+    :ensure nil
+    :hook ((c++-mode . hs-minor-mode)
+           (c++-mode . eglot)))
+#+end_src
+
+** GLSL
+
+#+begin_src emacs-lisp
+  (use-package glsl-mode
+    :hook ((glsl-mode . hs-minor-mode)
+           (glsl-mode . eglot)))
+#+end_src
+
+** C#
+
+#+begin_src emacs-lisp
+  (use-package csharp-mode
+    :ensure nil
+    :hook ((csharp-mode . hs-minor-mode)
+           (csharp-mode . eglot)))
+#+end_src
+
+** JavaScript
+
+#+begin_src emacs-lisp
+  (use-package jsdoc)
+  (use-package lorem-ipsum)
+  (use-package typescript-mode
+    :hook ((typescript-mode . hs-minor-mode)
+           (typescript-mode . eglot)))
+  (use-package js-mode
+    :ensure nil
+    :hook ((js-mode . hs-minor-mode)
+           (js-mode . eglot)))
+  (use-package prettier-js
+    :hook ((typescript-mode js-mode css-mode scss-mode) . prettier-js-mode))
+
+  (rc/local-map js-mode-hook
+                ("C-d" . jsdoc)
+                ("C-l C-l" . lorem-ipsum-insert-paragraphs)
+                ("C-l C-s" . lorem-ipsum-insert-sentences)
+                ("C-l C-i" . lorem-ipsum-insert-list))
+  (rc/local-map typescript-mode-hook
+                ("C-d" . jsdoc)
+                ("C-l C-l" . lorem-ipsum-insert-paragraphs)
+                ("C-l C-s" . lorem-ipsum-insert-sentences)
+                ("C-l C-i" . lorem-ipsum-insert-list))
+#+end_src
+
+** Java
+
+#+begin_src emacs-lisp
+  (use-package java-mode
+    :ensure nil
+    :hook ((java-mode . hs-minor-mode)
+           (java-mode . eglot)))
+#+end_src
+
+** Python
+
+#+begin_src emacs-lisp
+  (use-package python-mode
+    :ensure nil
+    :hook ((python-mode . hs-minor-mode)
+           (python-mode . eglot)))
+#+end_src
+
+** Lua
+
+#+begin_src emacs-lisp
+  (use-package lua-mode
+    :hook ((lua-mode . hs-minor-mode)
+           (lua-mode . eglot))
+    :config
+    (setq lua-indent-level 4))
+#+end_src
+
+** Rust
+
+#+begin_src emacs-lisp
+  (use-package rustic
+    :hook ((rust-mode . hs-minor-mode)
+           (rust-mode . eglot)))
+  (rc/local-map rust-mode-hook
+                ("C-c C-f" . rustic-cargo-fmt)
+                ("C-c C-a" . rustic-cargo-add)
+                ("C-c C-i" . rustic-cargo-init)
+                ("C-c C-t" . rustic-cargo-test)
+                ("C-c C-r" . rustic-cargo-run)
+                ("C-p" . rustic-popup)
+                ("C-r" . rustic-reload)
+                ("C-S-C" . rustic-compile)
+                ("C-f" . rustic-format-buffer))
+#+end_src
+
+** Clojure
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :hook (((clojure-mode cider-mode) . hs-minor-mode)
+           ((clojure-mode cider-mode) . eglot)))
+
+  (rc/local-map clojure-mode-hook
+                ("C-c C-j" . cider-jack-in)
+                ("C-c C-b" . cider-load-buffer)
+                ("C-c C-f" . cider-load-all-files)
+                ("C-c C-c" . cider-eval-defun-to-comment)
+                ("C-c C-e" . cider-eval-defun-at-point))
+#+end_src
+
+** Go
+
+#+begin_src emacs-lisp
+  (use-package go-mode
+    :hook ((go-mode . hs-minor-mode)
+           (go-mode . eglot)))
+#+end_src
+
+** Zig
+
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :hook ((zig-mode . hs-minor-mode)
+           (zig-mode . eglot)))
+#+end_src
+
+** Web
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
+           "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
+           "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
+    :hook (web-mode . eglot))
+
+  (rc/local-map web-mode-hook
+                ("C-l C-l" . lorem-ipsum-insert-paragraphs)
+                ("C-l C-s" . lorem-ipsum-insert-sentences)
+                ("C-l C-i" . lorem-ipsum-insert-list))
+#+end_src
+
+** CSS/SCSS
+
+#+begin_src emacs-lisp
+  (use-package css-mode
+    :ensure nil
+    :hook ((css-mode . hs-minor-mode)
+           (css-mode . eglot)))
+  (use-package scss-mode
+    :ensure nil
+    :hook ((scss-mode . hs-minor-mode)
+           (scss-mode . eglot)))
+#+end_src
+
+** Fennel
+
+#+begin_src emacs-lisp
+  (use-package fennel-mode
+    :vc (fennel-mode :url "https://git.sr.ht/~technomancy/fennel-mode"
+                     :branch "main")
+    :mode "\\.fnl\\'"
+    :hook ((fennel-mode . hs-minor-mode)
+           (fennel-mode . eglot)))
+#+end_src
+
+** Ren'Py
+
+#+begin_src emacs-lisp
+  (use-package renpy
+    :vc (renpy-mode :url "https://github.com/Reagankm/renpy-mode.git"
+                    :branch "master"))
+#+end_src
+
+** Racket
+
+#+begin_src emacs-lisp
+  (use-package racket-mode)
+
+  (rc/local-map racket-mode-hook
+                ("C-r C-r" . racket-run-and-switch-to-repl)
+                ("C-r C-t" . racket-test)
+                ("C-r C-R" . racket-racket)
+                ("C-h C-h" . racket-repl-describe)
+                ("C-h C-d" . racket-documentation-search))
+#+end_src
+
+** Scheme
+
+This configuration is implying that [[https://www.gnu.org/software/guile/][Guile Scheme]] is used.
+
+#+begin_src emacs-lisp
+  (use-package geiser)
+  (use-package geiser-guile)
+  (use-package scheme-mode
+    :ensure nil
+    :hook (scheme-mode . hs-minor-mode)
+    :init
+    (setq scheme-program-name "guile"))
+
+  (rc/local-map scheme-mode-hook
+                ("C-r C-r" . geiser-mode-switch-to-repl)
+                ("C-r C-S-R" . geiser)
+                ("C-r C-l" . geiser-load-file)
+                ("C-r C-s" . geiser-restart-repl)
+                ("C-r C-e" . geiser-exit-repl)
+                ("C-e C-e" . geiser-eval-definition)
+                ("C-e C-r" . geiser-eval-region)
+                ("C-e C-s" . geiser-eval-last-sexp)
+                ("C-e C-b" . geiser-eval-buffer)
+                ("C-e C-x" . geiser-eval-interrupt)
+                ("C-h C-h" . geiser-doc-symbol-at-point)
+                ("C-h C-m" . geiser-doc-module)
+                ("C-h C-S-H" . geiser-doc-look-up-manual))
+#+end_src
+
+** Lisp
+
+The most powerful programming language.
+
+#+begin_quote
+Programs must be written for people to read,
+and only incidentally for machines to execute. -- Abelson & Sussman
+#+end_quote
+
+#+begin_src emacs-lisp
+  (use-package sly
+    :commands sly-mrepl-return
+    :hook (sly-mode . (lambda () (local-set-key (kbd "M-RET")
+                                                #'sly-mrepl-return)))
+    :init
+    (setq inferior-lisp-program "sbcl"))
+  (use-package paredit
+    :hook ((emacs-lisp-mode
+            eval-expression-minibuffer-setup
+            ielm-mode
+            lisp-interaction-mode
+            lisp-mode
+            sly-mode
+            clojure-mode
+            cider-mode
+            fennel-mode
+            racket-mode
+            scheme-mode)
+           . enable-paredit-mode))
+  (use-package rainbow-delimiters
+    :hook (emacs-lisp-mode
+           eval-expression-minibuffer-setup
+           ielm-mode
+           lisp-interaction-mode
+           lisp-mode
+           sly-mode
+           clojure-mode
+           cider-mode
+           fennel-mode
+           racket-mode
+           scheme-mode))
+
+  (rc/local-map lisp-mode-hook
+                ("C-s" . sly)
+                ("C-r" . sly-restart-inferior-lisp)
+                ("C-a" . sly-apropos)
+                ("C-k" . sly-thread-kill)
+                ("C-c" . sly-mrepl-clear-repl)
+                ("C-e C-e" . sly-eval-last-expression)
+                ("C-e C-b" . sly-eval-buffer)
+                ("C-e C-r" . sly-eval-region)
+                ("C-e C-e" . sly-eval-last-expression)
+                ("C-e C-b" . sly-eval-buffer)
+                ("C-e C-r" . sly-eval-region)
+                ("C-e C-m" . sly-eval-macroexpand)
+                ("C-h C-s" . sly-describe-symbol)
+                ("C-h C-d" . sly-documentation)
+                ("C-h C-h" . sly-documentation-lookup)
+                ("C-m C-m" . sly-macroexpand-1)
+                ("C-m C-S-M" . sly-macroexpand-all)
+                ("C-m C-i" . sly-macroexpand-1-inplace)
+                ("C-m C-S-I" . sly-macroexpand-all-inplace)
+                ("C-m C-a" . sly-macroexpand-again)
+                ("C-m C-u" . sly-macroexpand-undo))
+#+end_src
+
+** Haskell
+
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+    :hook ((haskell-mode . hs-minor-mode)
+           (haskell-mode . eglot)))
+#+end_src
+
+** Docker
+
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode)
+  (use-package docker-compose-mode)
+#+end_src
+
+** Vue
+
+#+begin_src emacs-lisp
+  (use-package vue-mode
+    :hook (vue-mode . eglot)
+    :mode "\\.vue\\'")
+#+end_src
