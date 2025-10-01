@@ -31,6 +31,12 @@ Sometimes it’s also needed to target =early-init.el= with tangling. In this ca
 ;;; -*- lexical-binding: t -*-
 #+end_src
 
+To not deal with =init.el= changing on tangle, you can run:
+
+#+begin_src bash :tangle no
+  git update-index --assume-unchanged init.el
+#+end_src
+
 ** Automatic tangling of =init.org=
 
 You can use =C-c C-v t= to run =org-babel-tangle=. It extracts all code blocks and inserts them into =init.el= (and some into =early-init.el=). 
