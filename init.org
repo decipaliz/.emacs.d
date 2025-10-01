@@ -233,7 +233,9 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-q C-S-K" . kill-emacs)
 
                 ("C-z C-r" . recentf)
-                ("C-z C-f" . hs-toggle-hiding)))
+                ("C-z C-f" . hs-toggle-hiding)
+
+                ("C-<tab>" . complete-symbol)))
 #+end_src
 
 I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel extremely awkward to me - I prefer to rebind them if possible.
@@ -330,6 +332,18 @@ I was debating between using the default Emacs modeline and the Doom modeline an
                             " "
                             (nano-modeline-buffer-name))
                           `((nano-modeline-git-info)
+                            (funcall (lambda () (propertize
+                                                 (if vc-mode " | " "")
+                                                 'face (nano-modeline-face 'secondary))))
+                            (funcall (lambda () (propertize
+                                                 (symbol-name major-mode)
+                                                 'face (nano-modeline-face 'secondary))))
+                            " "
+                            (funcall (lambda () (propertize
+                                                 (format "(%d)"
+                                                         (length minor-mode-list))
+                                                 'face (nano-modeline-face 'secondary))))
+                            " | "
                             (nano-modeline-cursor-position)
                             (nano-modeline-window-dedicated))
                           1))
