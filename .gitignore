@@ -22,8 +22,6 @@ server/
 network-security.data
 auto-save-list/
 eln-cache/
-elpaca/
-ielm-history.eld
 recentf
 transient/
 .cache/
@@ -36,7 +34,6 @@ workspace/
 session.*
 racket-mode/
 url/
-lsp-cache/
-bin/.pid
 projects
 bookmarks
+autosave/

@@ -497,11 +497,11 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package c-mode
     :ensure nil
     :hook ((c-mode . hs-minor-mode)
-           (c-mode . eglot)))
+           (c-mode . eglot-ensure)))
   (use-package c++-mode
     :ensure nil
     :hook ((c++-mode . hs-minor-mode)
-           (c++-mode . eglot)))
+           (c++-mode . eglot-ensure)))
 #+end_src
 
 ** GLSL
@@ -509,7 +509,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package glsl-mode
     :hook ((glsl-mode . hs-minor-mode)
-           (glsl-mode . eglot)))
+           (glsl-mode . eglot-ensure)))
 #+end_src
 
 ** C#
@@ -518,7 +518,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package csharp-mode
     :ensure nil
     :hook ((csharp-mode . hs-minor-mode)
-           (csharp-mode . eglot)))
+           (csharp-mode . eglot-ensure)))
 #+end_src
 
 ** JavaScript
@@ -528,11 +528,11 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package lorem-ipsum)
   (use-package typescript-mode
     :hook ((typescript-mode . hs-minor-mode)
-           (typescript-mode . eglot)))
+           (typescript-mode . eglot-ensure)))
   (use-package js-mode
     :ensure nil
     :hook ((js-mode . hs-minor-mode)
-           (js-mode . eglot)))
+           (js-mode . eglot-ensure)))
   (use-package prettier-js
     :hook ((typescript-mode js-mode css-mode scss-mode) . prettier-js-mode))
 
@@ -554,7 +554,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package java-mode
     :ensure nil
     :hook ((java-mode . hs-minor-mode)
-           (java-mode . eglot)))
+           (java-mode . eglot-ensure)))
 #+end_src
 
 ** Python
@@ -563,7 +563,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package python-mode
     :ensure nil
     :hook ((python-mode . hs-minor-mode)
-           (python-mode . eglot)))
+           (python-mode . eglot-ensure)))
 #+end_src
 
 ** Lua
@@ -571,7 +571,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package lua-mode
     :hook ((lua-mode . hs-minor-mode)
-           (lua-mode . eglot))
+           (lua-mode . eglot-ensure))
     :config
     (setq lua-indent-level 4))
 #+end_src
@@ -581,7 +581,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package rustic
     :hook ((rust-mode . hs-minor-mode)
-           (rust-mode . eglot)))
+           (rust-mode . eglot-ensure)))
   (rc/local-map rust-mode-hook
                 ("C-c C-f" . rustic-cargo-fmt)
                 ("C-c C-a" . rustic-cargo-add)
@@ -599,7 +599,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package cider
     :hook (((clojure-mode cider-mode) . hs-minor-mode)
-           ((clojure-mode cider-mode) . eglot)))
+           ((clojure-mode cider-mode) . eglot-ensure)))
 
   (rc/local-map clojure-mode-hook
                 ("C-c C-j" . cider-jack-in)
@@ -614,7 +614,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package go-mode
     :hook ((go-mode . hs-minor-mode)
-           (go-mode . eglot)))
+           (go-mode . eglot-ensure)))
 #+end_src
 
 ** Zig
@@ -622,7 +622,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package zig-mode
     :hook ((zig-mode . hs-minor-mode)
-           (zig-mode . eglot)))
+           (zig-mode . eglot-ensure)))
 #+end_src
 
 ** Web
@@ -631,7 +631,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
     :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
            "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
            "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
-    :hook (web-mode . eglot))
+    :hook (web-mode . eglot-ensure))
 
   (rc/local-map web-mode-hook
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
@@ -645,11 +645,11 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package css-mode
     :ensure nil
     :hook ((css-mode . hs-minor-mode)
-           (css-mode . eglot)))
+           (css-mode . eglot-ensure)))
   (use-package scss-mode
     :ensure nil
     :hook ((scss-mode . hs-minor-mode)
-           (scss-mode . eglot)))
+           (scss-mode . eglot-ensure)))
 #+end_src
 
 ** Fennel
@@ -660,7 +660,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
                      :branch "main")
     :mode "\\.fnl\\'"
     :hook ((fennel-mode . hs-minor-mode)
-           (fennel-mode . eglot)))
+           (fennel-mode . eglot-ensure)))
 #+end_src
 
 ** Ren'Py
@@ -784,7 +784,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 #+begin_src emacs-lisp
   (use-package haskell-mode
     :hook ((haskell-mode . hs-minor-mode)
-           (haskell-mode . eglot)))
+           (haskell-mode . eglot-ensure)))
 #+end_src
 
 ** Docker
@@ -798,6 +798,6 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 
 #+begin_src emacs-lisp
   (use-package vue-mode
-    :hook (vue-mode . eglot)
+    :hook (vue-mode . eglot-ensure)
     :mode "\\.vue\\'")
 #+end_src

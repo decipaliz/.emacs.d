@@ -1,12 +1,7 @@
-;; -*- lexical-binding: t -*-
+;; this file gets replaced with generated configuration from init.org
 
-(load-file (expand-file-name "core/macros.el" user-emacs-directory))
-
-(load! core/elpaca)
-
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file t t)
-
-(load! config)
-(load! package/init)
-(load! local/init)
+(require 'org)
+(find-file (expand-file-name "init.org" user-emacs-directory))
+(org-babel-tangle)
+(load-file (expand-file-name "init.el" user-emacs-directory))
+(byte-compile-file (expand-file-name "init.el" user-emacs-directory))
