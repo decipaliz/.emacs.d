@@ -479,6 +479,8 @@ Despite Projectile having support of ripgrep, I still like to be able to manuall
 
 #+begin_src emacs-lisp
   (use-package rg
+    :bind (:map rc/custom-bindings-map
+                ("C-z C-s" . rg))
     :config
     (setq rg-command-line-flags '("-."))
     (setq rg-ignore-case 'smart))
