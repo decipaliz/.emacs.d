@@ -378,6 +378,7 @@ The most important package by far.
 
 #+begin_src emacs-lisp
   (use-package projectile
+    :bind-keymap ("C-x p" . projectile-command-map)
     :init
     (projectile-mode 1))
 #+end_src
