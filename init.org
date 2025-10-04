@@ -250,8 +250,9 @@ I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel ext
   (use-package emacs
     :ensure nil
     :bind (:map rc/custom-bindings-map
-                ("C-z C-," . beginning-of-buffer)
-                ("C-z C-." . end-of-buffer)))
+                ("C-," . beginning-of-buffer)
+                ("C-." . end-of-buffer)
+                ("C--" . undo-redo)))
 #+end_src
 
 ** Custom functions
