@@ -521,11 +521,15 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package c-mode
     :ensure nil
     :hook ((c-mode . hs-minor-mode)
-           (c-mode . eglot-ensure)))
+           (c-mode . eglot-ensure))
+    :init
+    (setq c-basic-offset 4))
   (use-package c++-mode
     :ensure nil
     :hook ((c++-mode . hs-minor-mode)
-           (c++-mode . eglot-ensure)))
+           (c++-mode . eglot-ensure))
+    :init
+    (setq c++-basic-offset 4))
 #+end_src
 
 ** GLSL
