@@ -659,7 +659,9 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
     :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
            "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
            "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
-    :hook (web-mode . eglot-ensure))
+    :hook (web-mode . (lambda ()
+                        (when (string-suffix-p ".php" (buffer-name))
+                          (eglot-ensure)))))
 
   (use-package eglot
     :ensure nil
