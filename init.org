@@ -238,6 +238,9 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-q C-k" . save-buffers-kill-emacs)
                 ("C-z C-q C-S-K" . kill-emacs)
 
+                ("C-z C-x C-s" . replace-string)
+                ("C-z C-x C-r" . replace-regexp)
+
                 ("C-z C-r" . recentf)
                 ("C-z C-f" . hs-toggle-hiding)
 
@@ -275,7 +278,7 @@ Here I will define some functions I like to use in my configuration.
   (use-package emacs
     :ensure nil
     :bind (:map rc/custom-bindings-map
-                ("C-z q r" . rc/reset)))
+                ("C-z C-q C-r" . rc/reset)))
 #+end_src
 
 *** =rc/insert-lambda=
