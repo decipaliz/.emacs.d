@@ -233,6 +233,7 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-o C-i" . ielm)
                 ("C-z C-o C-s" . scratch-buffer)
                 ("C-z C-o C-w" . whitespace-mode)
+                ("C-z C-o C-r" . repeat-mode)
 
                 ("C-z C-q C-q" . delete-frame)
                 ("C-z C-q C-k" . save-buffers-kill-emacs)
