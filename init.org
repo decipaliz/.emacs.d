@@ -501,6 +501,19 @@ Despite Projectile having support of ripgrep, I still like to be able to manuall
     (global-hl-todo-mode 1))
 #+end_src
 
+** Dape
+
+A debug adapter client.
+
+#+begin_src emacs-lisp
+  (use-package dape
+    :after projectile
+    :custom
+    (dape-cwd-function #'projectile-project-root)
+    :config
+    (dape-breakpoint-global-mode 1))
+#+end_src
+
 * Language-specific packages and configurations
 
 I like to use a sort of a "local leader" for language-specific keybindings, this local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
