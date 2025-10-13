@@ -246,6 +246,11 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-f" . hs-toggle-hiding)
 
                 ("C-<tab>" . complete-symbol)))
+
+  (use-package eglot
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-z f" . eglot-format)))
 #+end_src
 
 I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel extremely awkward to me - I prefer to rebind them if possible.
