@@ -458,6 +458,8 @@ As much as I would like to use [[info:eshell#Top][eshell]] for everything, vterm
 
 #+begin_src emacs-lisp
   (use-package vterm
+    :bind (:map rc/custom-bindings-map
+                ("C-z C-o C-v" . vterm))
     :init
     (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
 #+end_src
