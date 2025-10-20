@@ -243,7 +243,6 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-x C-r" . replace-regexp)
 
                 ("C-z C-r" . recentf)
-                ("C-z C-f" . hs-toggle-hiding)
 
                 ("C-<tab>" . complete-symbol)))
 
@@ -299,6 +298,24 @@ Here I will define some functions I like to use in my configuration.
     :ensure nil
     :bind (:map rc/custom-bindings-map
                 ("C-\\" . rc/insert-lambda)))
+#+end_src
+
+*** =rc/toggle-fold=
+
+Toggle fold no matter what folding mode is enabled (=hs= or =outline-indent=)
+
+#+begin_src emacs-lisp
+  (defun rc/toggle-fold ()
+    "Toggle fold no matter what folding mode is enabled."
+    (interactive)
+    (cond
+     (outline-indent-minor-mode (outline-indent-toggle-fold))
+     (hs-minor-mode (hs-toggle-hiding))))
+
+  (use-package :emacs
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-z C-f" . rc/toggle-fold)))
 #+end_src
 
 * Packages
@@ -520,6 +537,14 @@ A debug adapter client.
     (dape-cwd-function #'projectile-project-root)
     :config
     (dape-breakpoint-global-mode 1))
+#+end_src
+
+** outline-indent
+
+A minor mode for Emacs that does folding based on indentation.
+
+#+begin_src emacs-lisp
+  (use-package outline-indent)
 #+end_src
 
 * Language-specific packages and configurations
@@ -860,4 +885,12 @@ and only incidentally for machines to execute. -- Abelson & Sussman
   (use-package vue-mode
     :hook (vue-mode . eglot-ensure)
     :mode "\\.vue\\'")
+#+end_src
+
+** YAML
+
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure nil
+    :hook ((yaml-mode . outline-indent-minor-mode)))
 #+end_src
