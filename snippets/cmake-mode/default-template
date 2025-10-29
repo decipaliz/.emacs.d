@@ -1,0 +1,53 @@
+# -*- mode: snippet -*-
+# name: default template
+# key: tpl
+# --
+
+########################################
+
+### Constants ###
+
+cmake_minimum_required(VERSION 3.10)
+
+project(
+  $1
+  VERSION 0.1.0
+  DESCRIPTION "$2"
+  HOMEPAGE_URL "https://github.com/decipaliz/$1"
+  LANGUAGES C
+)
+
+set(CMAKE_C_STANDARD 99)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+########################################
+
+### External libraries ###
+
+include(FetchContent)
+set(FETCHCONTENT_BASE_DIR \${CMAKE_SOURCE_DIR}/ext)
+
+########################################
+
+### Testing ###
+
+if(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+  include(CTest)
+  enable_testing()
+  file(GLOB_RECURSE TEST_SOURCES "test/*.c")
+
+  foreach(TEST_SOURCE \${TEST_SOURCES})
+    cmake_path(GET TEST_SOURCE STEM TEST_SOURCE_STEM)
+    add_executable(\${TEST_SOURCE_STEM} \${TEST_SOURCE})
+    target_link_libraries(\${TEST_SOURCE_STEM} PRIVATE ${PROJECT_NAME})
+    add_test(
+      NAME \${TEST_SOURCE_STEM}
+      COMMAND \${TEST_SOURCE_STEM}
+      WORKING_DIRECTORY \${PROJECT_SOURCE_DIR}
+    )
+  endforeach(TEST_SOURCE \${TEST_SOURCES})
+endif(NOT CMAKE_BUILD_TYPE STREQUAL "Release")
+
+########################################

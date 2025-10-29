@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: library
+# key: lib
+# --
+
+########################################
+
+### Target: $1.so ###
+
+file(GLOB_RECURSE ${2:SOURCES} "${3:src}/*.c")
+add_library($1 SHARED \${$2})
+target_include_directories($1 PRIVATE "$3"${4: PUBLIC "include"})
+target_link_libraries(
+  $1
+)
+install(TARGETS $1 DESTINATION lib)
+
+########################################
