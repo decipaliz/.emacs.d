@@ -297,7 +297,7 @@ Here I will define some functions I like to use in my configuration.
   (use-package emacs
     :ensure nil
     :bind (:map rc/custom-bindings-map
-                ("C-\\" . rc/insert-lambda)))
+                ("C-z C-\\" . rc/insert-lambda)))
 #+end_src
 
 *** =rc/toggle-fold=
