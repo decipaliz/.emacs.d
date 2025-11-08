@@ -339,17 +339,12 @@ I’m going to include [[https://melpa.org/#/getting-started][Melpa]] and Org mo
     (package-refresh-contents))
 #+end_src
 
-** Bad Wolf theme
+** Gruvbox theme
 
 #+begin_src emacs-lisp
-  (use-package badwolf-theme
+  (use-package gruvbox-theme
     :init
-    (load-theme 'badwolf t)
-    (add-hook 'minibuffer-setup-hook
-              (lambda ()
-                (make-local-variable 'face-remapping-alist)
-                (add-to-list 'face-remapping-alist
-                             '(highlight (:background "#45413b"))))))
+    (load-theme 'gruvbox t))
 #+end_src
 
 ** Modeline
