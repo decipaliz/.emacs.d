@@ -766,16 +766,16 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 
 ** Scheme
 
-This configuration is implying that [[https://www.gnu.org/software/guile/][Guile Scheme]] is used.
+This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] is used.
 
 #+begin_src emacs-lisp
   (use-package geiser)
-  (use-package geiser-guile)
+  (use-package geiser-gambit)
   (use-package scheme-mode
     :ensure nil
     :hook (scheme-mode . hs-minor-mode)
     :init
-    (setq scheme-program-name "guile"))
+    (setq scheme-program-name "gsi -:d@ gambit/geiser -"))
 
   (rc/local-map scheme-mode-hook
                 ("C-r C-r" . geiser-mode-switch-to-repl)
