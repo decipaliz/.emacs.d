@@ -245,11 +245,6 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-z C-r" . recentf)
 
                 ("C-<tab>" . complete-symbol)))
-
-  (use-package eglot
-    :ensure nil
-    :bind (:map rc/custom-bindings-map
-                ("C-z f" . eglot-format)))
 #+end_src
 
 I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel extremely awkward to me - I prefer to rebind them if possible.
@@ -542,6 +537,23 @@ A minor mode for Emacs that does folding based on indentation.
   (use-package outline-indent)
 #+end_src
 
+** LSP
+
+I tried using [[info:eglot][eglot]], but in the end, decided to switch back to =lsp-mode=. I tend to use languages with language servers that are difficult to install on the system, and I also prefer the fancy =lsp-ui=, glances instead of a separate buffer and the breadcrumbs. Maybe some day I will have much free time and I will implement these features using =eglot=, but not today.
+
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :hook ((lsp-mode . (lambda ()
+                         (setq lsp-headerline-breadcrumb-segments
+                               '(path-up-to-project file symbols))
+                         (lsp-headerline-breadcrumb-mode))))
+    :init
+    (setq lsp-enable-which-key-integration t)
+    (setq lsp-keymap-prefix "C-z l"))
+  (use-package lsp-ui
+    :hook ((lsp-mode . lsp-ui-mode)))
+#+end_src
+
 * Language-specific packages and configurations
 
 I like to use a sort of a "local leader" for language-specific keybindings, this local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
@@ -565,13 +577,13 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package c-mode
     :ensure nil
     :hook ((c-mode . hs-minor-mode)
-           (c-mode . eglot-ensure))
+           (c-mode . lsp-deferred))
     :init
     (setq c-basic-offset 4))
   (use-package c++-mode
     :ensure nil
     :hook ((c++-mode . hs-minor-mode)
-           (c++-mode . eglot-ensure))
+           (c++-mode . lsp-deferred))
     :init
     (setq c++-basic-offset 4))
 #+end_src
@@ -581,7 +593,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package glsl-mode
     :hook ((glsl-mode . hs-minor-mode)
-           (glsl-mode . eglot-ensure)))
+           (glsl-mode . lsp-deferred)))
 #+end_src
 
 ** C#
@@ -590,7 +602,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package csharp-mode
     :ensure nil
     :hook ((csharp-mode . hs-minor-mode)
-           (csharp-mode . eglot-ensure)))
+           (csharp-mode . lsp-deferred)))
 #+end_src
 
 ** JavaScript
@@ -600,11 +612,11 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package lorem-ipsum)
   (use-package typescript-mode
     :hook ((typescript-mode . hs-minor-mode)
-           (typescript-mode . eglot-ensure)))
+           (typescript-mode . lsp-deferred)))
   (use-package js-mode
     :ensure nil
     :hook ((js-mode . hs-minor-mode)
-           (js-mode . eglot-ensure)))
+           (js-mode . lsp-deferred)))
   (use-package prettier-js
     :hook ((typescript-mode js-mode css-mode scss-mode) . prettier-js-mode))
 
@@ -626,7 +638,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package java-mode
     :ensure nil
     :hook ((java-mode . hs-minor-mode)
-           (java-mode . eglot-ensure)))
+           (java-mode . lsp-deferred)))
 #+end_src
 
 ** Python
@@ -635,7 +647,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package python-mode
     :ensure nil
     :hook ((python-mode . hs-minor-mode)
-           (python-mode . eglot-ensure)))
+           (python-mode . lsp-deferred)))
 #+end_src
 
 ** Lua
@@ -643,7 +655,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package lua-mode
     :hook ((lua-mode . hs-minor-mode)
-           (lua-mode . eglot-ensure))
+           (lua-mode . lsp-deferred))
     :config
     (setq lua-indent-level 4))
 #+end_src
@@ -653,7 +665,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package rustic
     :hook ((rust-mode . hs-minor-mode)
-           (rust-mode . eglot-ensure)))
+           (rust-mode . lsp-deferred)))
   (rc/local-map rust-mode-hook
                 ("C-c C-f" . rustic-cargo-fmt)
                 ("C-c C-a" . rustic-cargo-add)
@@ -671,7 +683,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package cider
     :hook (((clojure-mode cider-mode) . hs-minor-mode)
-           ((clojure-mode cider-mode) . eglot-ensure)))
+           ((clojure-mode cider-mode) . lsp-deferred)))
 
   (rc/local-map clojure-mode-hook
                 ("C-c C-j" . cider-jack-in)
@@ -686,7 +698,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package go-mode
     :hook ((go-mode . hs-minor-mode)
-           (go-mode . eglot-ensure)))
+           (go-mode . lsp-deferred)))
 #+end_src
 
 ** Zig
@@ -694,7 +706,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
 #+begin_src emacs-lisp
   (use-package zig-mode
     :hook ((zig-mode . hs-minor-mode)
-           (zig-mode . eglot-ensure)))
+           (zig-mode . lsp-deferred)))
 #+end_src
 
 ** Web
@@ -705,13 +717,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
            "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
     :hook (web-mode . (lambda ()
                         (when (string-suffix-p ".php" (buffer-name))
-                          (eglot-ensure)))))
-
-  (use-package eglot
-    :ensure nil
-    :config
-    (add-to-list 'eglot-server-programs
-                 '(web-mode . ("phpactor" "language-server"))))
+                          (lsp-deferred)))))
 
   (rc/local-map web-mode-hook
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
@@ -725,11 +731,11 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
   (use-package css-mode
     :ensure nil
     :hook ((css-mode . hs-minor-mode)
-           (css-mode . eglot-ensure)))
+           (css-mode . lsp-deferred)))
   (use-package scss-mode
     :ensure nil
     :hook ((scss-mode . hs-minor-mode)
-           (scss-mode . eglot-ensure)))
+           (scss-mode . lsp-deferred)))
 #+end_src
 
 ** Fennel
@@ -740,7 +746,7 @@ I like to use a sort of a "local leader" for language-specific keybindings, this
                      :branch "main")
     :mode "\\.fnl\\'"
     :hook ((fennel-mode . hs-minor-mode)
-           (fennel-mode . eglot-ensure)))
+           (fennel-mode . lsp-deferred)))
 #+end_src
 
 ** Ren'Py
@@ -864,7 +870,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 #+begin_src emacs-lisp
   (use-package haskell-mode
     :hook ((haskell-mode . hs-minor-mode)
-           (haskell-mode . eglot-ensure)))
+           (haskell-mode . lsp-deferred)))
 #+end_src
 
 ** Docker
@@ -878,7 +884,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 
 #+begin_src emacs-lisp
   (use-package vue-mode
-    :hook (vue-mode . eglot-ensure)
+    :hook (vue-mode . lsp-deferred)
     :mode "\\.vue\\'")
 #+end_src
 
