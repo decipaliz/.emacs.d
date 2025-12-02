@@ -201,10 +201,8 @@ And of course, no menu, toolbar, scrollbar and blinking cursor.
 
 #+begin_src emacs-lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (add-hook 'after-init-hook
-            (lambda ()
-              (when (file-exists-p custom-file)
-                (load custom-file t t))))
+  (when (file-exists-p custom-file)
+    (load custom-file t t))
 #+end_src
 
 ** Autosave directory
