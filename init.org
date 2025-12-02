@@ -270,18 +270,6 @@ free real estate for my own keybindings.
                 ("C-<tab>" . complete-symbol)))
 #+end_src
 
-I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel
-extremely awkward to me - I prefer to rebind them if possible.
-
-#+begin_src emacs-lisp
-  (use-package emacs
-    :ensure nil
-    :bind (:map rc/custom-bindings-map
-                ("C-," . beginning-of-buffer)
-                ("C-." . end-of-buffer)
-                ("C--" . undo-redo)))
-#+end_src
-
 ** Custom functions
 
 Here I will define some functions I like to use in my configuration.
