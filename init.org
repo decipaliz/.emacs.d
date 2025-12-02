@@ -5,19 +5,27 @@
 
 * About
 
-This is my attempt at simplifying my existing GNU Emacs configuration that’s been used for several years. I’ve encountered that I tend to create many complex file structures inside of my configuration and also don’t document things as fervently as one would like.
+This is my attempt at simplifying my existing GNU Emacs configuration that’s
+been used for several years. I’ve encountered that I tend to create many complex
+file structures inside of my configuration and also don’t document things as
+fervently as one would like.
 
-Both of these problems are addressed by using a configuration file in [[info:org#Top][Org mode]]. It lets you keep all settings in one file and naturally encourages you to document them. Even if the file might get very long, navigating it inside Org mode is simple and convenient.
+Both of these problems are addressed by using a configuration file in [[info:org#Top][Org mode]].
+It lets you keep all settings in one file and naturally encourages you to
+document them. Even if the file might get very long, navigating it inside Org
+mode is simple and convenient.
 
 * Configuration
 
-This is an Org file which is [[info:org#Extracting Source Code][tangled]] into actual configuration. Whenever you see a source code block like this:
+This is an Org file which is [[info:org#Extracting Source Code][tangled]] into actual configuration. Whenever you see
+a source code block like this:
 
 #+begin_src emacs-lisp
 ;;; -*- lexical-binding: t -*-
 #+end_src
 
-It is usually tangled into =init.el=. But not every code block is tangled - some are marked with =:tangle no=.
+It is usually tangled into =init.el=. But not every code block is tangled - some
+are marked with =:tangle no=.
 
 #+begin_src org :tangle no
   ,#+begin_src emacs-lisp :tangle no
@@ -25,7 +33,8 @@ It is usually tangled into =init.el=. But not every code block is tangled - some
   ,#+end_src
 #+end_src
 
-Sometimes it’s also needed to target =early-init.el= with tangling. In this case, =:tangle early-init.el= is set:
+Sometimes it’s also needed to target =early-init.el= with tangling. In this
+case, =:tangle early-init.el= is set:
 
 #+begin_src emacs-lisp :tangle early-init.el
 ;;; -*- lexical-binding: t -*-
@@ -39,9 +48,12 @@ To not deal with =init.el= changing on tangle, you can run:
 
 ** Automatic tangling of =init.org=
 
-You can use =C-c C-v t= to run =org-babel-tangle=. It extracts all code blocks and inserts them into =init.el= (and some into =early-init.el=). 
+You can use =C-c C-v t= to run =org-babel-tangle=. It extracts all code blocks
+and inserts them into =init.el= (and some into =early-init.el=).
 
-Tangling the =init.org= file every time manually isn’t satisfactory. We can define a function and add it to =after-save-hook= to do it automatically every time =init.org= changes.
+Tangling the =init.org= file every time manually isn’t satisfactory. We can
+define a function and add it to =after-save-hook= to do it automatically every
+time =init.org= changes.
 
 #+begin_src emacs-lisp
   (require 'org)
@@ -77,7 +89,10 @@ Tangling the =init.org= file every time manually isn’t satisfactory. We can de
   (add-hook 'emacs-startup-hook #'rc/display-startup-performance)
 #+end_src
 
-An interesting piece of information I encountered online is the fact that you can improve startup time by setting =gc-cons-threshold= to a very large value during startup, and then setting it to a more sane value after startup. The values I’m going to use are =most-positive-fixnum= and =50mb= respectively.
+An interesting piece of information I encountered online is the fact that you
+can improve startup time by setting =gc-cons-threshold= to a very large value
+during startup, and then setting it to a more sane value after startup. The
+values I’m going to use are =most-positive-fixnum= and =50mb= respectively.
 
 #+begin_src emacs-lisp :tangle early-init.el
   (let ((file-name-handler-alist-old file-name-handler-alist))
@@ -111,7 +126,8 @@ An interesting piece of information I encountered online is the fact that you ca
         display-line-numbers-type 'relative)
 #+end_src
 
-Some variables are local to buffers, so they should be changed with =setq-default=.
+Some variables are local to buffers, so they should be changed with
+=setq-default=.
 
 #+begin_src emacs-lisp
   (setq-default tab-width 4
@@ -124,7 +140,8 @@ Some variables are local to buffers, so they should be changed with =setq-defaul
 
 ** Yes or No
 
-I don’t like writing =yes= and =no= every time, so I prefer to use =y-or-n-p= function instead of =yes-or-no-p=.
+I don’t like writing =yes= and =no= every time, so I prefer to use =y-or-n-p=
+function instead of =yes-or-no-p=.
 
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -132,7 +149,8 @@ I don’t like writing =yes= and =no= every time, so I prefer to use =y-or-n-p= 
 
 ** Default global modes
 
-These modes are global - meaning once they are enabled, they work by default in every buffer.
+These modes are global - meaning once they are enabled, they work by default in
+every buffer.
 
 #+begin_src emacs-lisp
   (dolist (mode '(electric-pair-mode
@@ -148,7 +166,8 @@ These modes are global - meaning once they are enabled, they work by default in 
 
 ** Appearance settings
 
-I prefer the Hack font, and I also prefer to use a fixed pitch font in place of variable pitch font too. You can download Hack Nerd Font from [[https://www.nerdfonts.com/font-downloads][Nerd Fonts]].
+I prefer the Hack font, and I also prefer to use a fixed pitch font in place of
+variable pitch font too. You can download Hack Nerd Font from [[https://www.nerdfonts.com/font-downloads][Nerd Fonts]].
 
 #+begin_src emacs-lisp
   (set-face-attribute 'default
@@ -190,7 +209,8 @@ And of course, no menu, toolbar, scrollbar and blinking cursor.
 
 ** Autosave directory
 
-To avoid garbage in the filesystem, I prefer to place autosaves in a special directory.
+To avoid garbage in the filesystem, I prefer to place autosaves in a special
+directory.
 
 #+begin_src emacs-lisp
   (defvar rc/autosave-directory
@@ -205,7 +225,8 @@ To avoid garbage in the filesystem, I prefer to place autosaves in a special dir
 
 ** Custom bindings
 
-I use a minor mode that has an associated keymap to hold all of my custom keybindings.
+I use a minor mode that has an associated keymap to hold all of my custom
+keybindings.
 
 #+begin_src emacs-lisp
   (defvar rc/custom-bindings-map (make-sparse-keymap)
@@ -216,7 +237,9 @@ I use a minor mode that has an associated keymap to hold all of my custom keybin
     :keymap rc/custom-bindings-map)
 #+end_src
 
-I prefer to use a sort of a leader key for my keybindings - this leader key is =C-z=. Since you can minimize Emacs by =C-x C-z=, I think this keybinding is free real estate for my own keybindings.
+I prefer to use a sort of a leader key for my keybindings - this leader key is
+=C-z=. Since you can minimize Emacs by =C-x C-z=, I think this keybinding is
+free real estate for my own keybindings.
 
 #+begin_src emacs-lisp
   (require 'bind-key)
@@ -247,7 +270,8 @@ I prefer to use a sort of a leader key for my keybindings - this leader key is =
                 ("C-<tab>" . complete-symbol)))
 #+end_src
 
-I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel extremely awkward to me - I prefer to rebind them if possible.
+I use =Alt+Shift= to switch keyboard layouts, so all =M-S-= keybindings feel
+extremely awkward to me - I prefer to rebind them if possible.
 
 #+begin_src emacs-lisp
   (use-package emacs
@@ -272,7 +296,8 @@ Here I will define some functions I like to use in my configuration.
     (delete-other-windows)
     (delete-other-frames)
     (dolist (buf (buffer-list))
-      (unless (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
+      (unless
+          (member (buffer-name buf) '("*scratch*" "*Messages*" "*Warnings*"))
         (kill-buffer (buffer-name buf)))))
 
   (use-package emacs
@@ -315,7 +340,10 @@ Toggle fold no matter what folding mode is enabled (=hs= or =outline-indent=)
 
 * Packages
 
-I’m using Emacs’s built-in package manager since I’m trying to minimize the amount of extra dependencies (because there’s a *lot* of them in my older configuration). Thankfully, [[info:use-package#Top][use-package]] is integrated into Emacs since Emacs 29, so I can use this convenience without feeling bad about installing it.
+I’m using Emacs’s built-in package manager since I’m trying to minimize the
+amount of extra dependencies (because there’s a *lot* of them in my older
+configuration). Thankfully, [[info:use-package#Top][use-package]] is integrated into Emacs since Emacs 29,
+so I can use this convenience without feeling bad about installing it.
 
 #+begin_src emacs-lisp
   (require 'use-package)
@@ -344,7 +372,9 @@ I’m going to include [[https://melpa.org/#/getting-started][Melpa]] and Org mo
 
 ** Modeline
 
-I was debating between using the default Emacs modeline and the Doom modeline and decided to use the [[https://github.com/rougier/nano-modeline][N Λ N O Modeline]] instead. Maybe I'll define my own modeline later to get rid of this package too.
+I was debating between using the default Emacs modeline and the Doom modeline
+and decided to use the [[https://github.com/rougier/nano-modeline][N Λ N O Modeline]] instead. Maybe I'll define my own
+modeline later to get rid of this package too.
 
 #+begin_src emacs-lisp
   (use-package nano-modeline
@@ -355,17 +385,20 @@ I was debating between using the default Emacs modeline and the Doom modeline an
                             " "
                             (nano-modeline-buffer-name))
                           `((nano-modeline-git-info)
-                            (funcall (lambda () (propertize
-                                                 (if vc-mode " | " "")
-                                                 'face (nano-modeline-face 'secondary))))
-                            (funcall (lambda () (propertize
-                                                 (symbol-name major-mode)
-                                                 'face (nano-modeline-face 'secondary))))
+                            (funcall (lambda ()
+                                       (propertize
+                                        (if vc-mode " | " "")
+                                        'face (nano-modeline-face 'secondary))))
+                            (funcall (lambda ()
+                                       (propertize
+                                        (symbol-name major-mode)
+                                        'face (nano-modeline-face 'secondary))))
                             " "
-                            (funcall (lambda () (propertize
-                                                 (format "(%d)"
-                                                         (length minor-mode-list))
-                                                 'face (nano-modeline-face 'secondary))))
+                            (funcall (lambda ()
+                                       (propertize
+                                        (format "(%d)"
+                                                (length minor-mode-list))
+                                        'face (nano-modeline-face 'secondary))))
                             " | "
                             (nano-modeline-cursor-position)
                             (nano-modeline-window-dedicated))
@@ -439,14 +472,16 @@ I also use orderless to allow for completion based on regexps.
 #+begin_src emacs-lisp
   (use-package orderless
     :config
-    (setq completion-styles '(orderless basic partial-completion)
-          completion-category-overrides '((file (styles basic partial-completion)))
-          completion-category-defaults nil))
+    (setq
+     completion-styles '(orderless basic partial-completion)
+     completion-category-overrides '((file (styles basic partial-completion)))
+     completion-category-defaults nil))
 #+end_src
 
 ** Which key
 
-Despite using Emacs for quite a while, I still find this plugin extremely useful.
+Despite using Emacs for quite a while, I still find this plugin extremely
+useful.
 
 #+begin_src emacs-lisp
   (use-package which-key
@@ -482,7 +517,8 @@ I also like to use vterm-toggle to open it quickly.
 
 ** YASnippet
 
-I have been addicted to [[https://joaotavora.github.io/yasnippet/][YASnippet]] for quite a while now. Can't imagine using Emacs without it.
+I have been addicted to [[https://joaotavora.github.io/yasnippet/][YASnippet]] for quite a while now. Can't imagine using
+Emacs without it.
 
 #+begin_src emacs-lisp
   (use-package yasnippet
@@ -495,7 +531,8 @@ I have been addicted to [[https://joaotavora.github.io/yasnippet/][YASnippet]] f
 
 ** ripgrep
 
-Despite Projectile having support of ripgrep, I still like to be able to manually search in directories using =rg=.
+Despite Projectile having support of ripgrep, I still like to be able to
+manually search in directories using =rg=.
 
 #+begin_src emacs-lisp
   (use-package rg
@@ -539,7 +576,11 @@ A minor mode for Emacs that does folding based on indentation.
 
 ** LSP
 
-I tried using [[info:eglot][eglot]], but in the end, decided to switch back to =lsp-mode=. I tend to use languages with language servers that are difficult to install on the system, and I also prefer the fancy =lsp-ui=, glances instead of a separate buffer and the breadcrumbs. Maybe some day I will have much free time and I will implement these features using =eglot=, but not today.
+I tried using [[info:eglot][eglot]], but in the end, decided to switch back to =lsp-mode=. I
+tend to use languages with language servers that are difficult to install on the
+system, and I also prefer the fancy =lsp-ui=, glances instead of a separate
+buffer and the breadcrumbs. Maybe some day I will have much free time and I will
+implement these features using =eglot=, but not today.
 
 #+begin_src emacs-lisp
   (use-package lsp-mode
@@ -556,7 +597,9 @@ I tried using [[info:eglot][eglot]], but in the end, decided to switch back to =
 
 * Language-specific packages and configurations
 
-I like to use a sort of a "local leader" for language-specific keybindings, this local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
+I like to use a sort of a "local leader" for language-specific keybindings, this
+local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to
+set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
 
 #+begin_src emacs-lisp
     (defmacro rc/local-map (hook &rest pairs)
