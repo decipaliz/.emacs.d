@@ -122,8 +122,7 @@ values I’m going to use are =most-positive-fixnum= and =50mb= respectively.
         inhibit-startup-screen t
         initial-scratch-message nil
         recentf-max-saved-items 10000
-        ring-bell-function 'ignore
-        display-line-numbers-type 'relative)
+        ring-bell-function 'ignore)
 #+end_src
 
 Some variables are local to buffers, so they should be changed with
@@ -744,9 +743,10 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
     :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
            "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
            "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
-    :hook (web-mode . (lambda ()
+    :hook ((web-mode . hs-minor-mode)
+           (web-mode . (lambda ()
                         (when (string-suffix-p ".php" (buffer-name))
-                          (lsp-deferred)))))
+                          (lsp-deferred))))))
 
   (rc/local-map web-mode-hook
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
@@ -783,13 +783,15 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
 #+begin_src emacs-lisp
   (use-package renpy
     :vc (renpy-mode :url "https://github.com/Reagankm/renpy-mode.git"
-                    :branch "master"))
+                    :branch "master")
+    :hook ((renpy-mode . outline-indent-minor-mode)))
 #+end_src
 
 ** Racket
 
 #+begin_src emacs-lisp
-  (use-package racket-mode)
+  (use-package racket-mode
+    :hook ((racket-mode . hs-minor-mode)))
 
   (rc/local-map racket-mode-hook
                 ("C-r C-r" . racket-run-and-switch-to-repl)
@@ -869,6 +871,19 @@ and only incidentally for machines to execute. -- Abelson & Sussman
            fennel-mode
            racket-mode
            scheme-mode))
+  (use-package hs-minor
+    :ensure nil
+    :hook (emacs-lisp-mode
+           eval-expression-minibuffer-setup
+           ielm-mode
+           lisp-interaction-mode
+           lisp-mode
+           sly-mode
+           clojure-mode
+           cider-mode
+           fennel-mode
+           racket-mode
+           scheme-mode))
 
   (rc/local-map lisp-mode-hook
                 ("C-s" . sly)
@@ -905,15 +920,18 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 ** Docker
 
 #+begin_src emacs-lisp
-  (use-package dockerfile-mode)
-  (use-package docker-compose-mode)
+  (use-package dockerfile-mode
+    :hook ((dockerfile-mode . outline-indent-minor-mode)))
+  (use-package docker-compose-mode
+    :hook ((docker-compose-mode . outline-indent-minor-mode)))
 #+end_src
 
 ** Vue
 
 #+begin_src emacs-lisp
   (use-package vue-mode
-    :hook (vue-mode . lsp-deferred)
+    :hook ((vue-mode . outline-indent-minor-mode)
+           (vue-mode . lsp-deferred))
     :mode "\\.vue\\'")
 #+end_src
 
