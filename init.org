@@ -819,6 +819,15 @@ and only incidentally for machines to execute. -- Abelson & Sussman
     (setq lua-indent-level 4))
 #+end_src
 
+** Org
+
+#+begin_src emacs-lisp
+  (use-package org-mode
+    :ensure nil
+    :bind (:map rc/custom-bindings-map
+                ("C-c l" . org-store-link)))
+#+end_src
+
 ** Python
 
 #+begin_src emacs-lisp
