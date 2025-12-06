@@ -907,23 +907,8 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
     :mode "\\.vue\\'")
 #+end_src
 
-** YAML
-
-#+begin_src emacs-lisp
-  (use-package yaml-mode
-    :ensure nil
-    :hook ((yaml-mode . outline-indent-minor-mode)))
-#+end_src
-
-** Zig
-
-#+begin_src emacs-lisp
-  (use-package zig-mode
-    :hook ((zig-mode . hs-minor-mode)
-           (zig-mode . lsp-deferred)))
-#+end_src
-
 ** Web
+
 #+begin_src emacs-lisp
   (use-package web-mode
     :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
@@ -938,4 +923,20 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
                 ("C-l C-s" . lorem-ipsum-insert-sentences)
                 ("C-l C-i" . lorem-ipsum-insert-list))
+#+end_src
+
+** YAML
+
+#+begin_src emacs-lisp
+  (use-package yaml-mode
+    :ensure nil
+    :hook ((yaml-mode . outline-indent-minor-mode)))
+#+end_src
+
+** Zig
+
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :hook ((zig-mode . hs-minor-mode)
+           (zig-mode . lsp-deferred)))
 #+end_src
