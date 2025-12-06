@@ -874,13 +874,10 @@ and only incidentally for machines to execute. -- Abelson & Sussman
   (use-package hs-minor
     :ensure nil
     :hook (emacs-lisp-mode
-           eval-expression-minibuffer-setup
            ielm-mode
            lisp-interaction-mode
            lisp-mode
-           sly-mode
            clojure-mode
-           cider-mode
            fennel-mode
            racket-mode
            scheme-mode))
