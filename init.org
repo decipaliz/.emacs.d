@@ -598,6 +598,15 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
                       pairs))))
 #+end_src
 
+** C#
+
+#+begin_src emacs-lisp
+  (use-package csharp-mode
+    :ensure nil
+    :hook ((csharp-mode . hs-minor-mode)
+           (csharp-mode . lsp-deferred)))
+#+end_src
+
 ** C/C++
 
 #+begin_src emacs-lisp
@@ -616,6 +625,54 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
     (setq c++-basic-offset 4))
 #+end_src
 
+** Clojure
+
+#+begin_src emacs-lisp
+  (use-package cider
+    :hook (((clojure-mode cider-mode) . hs-minor-mode)
+           ((clojure-mode cider-mode) . lsp-deferred)))
+
+  (rc/local-map clojure-mode-hook
+                ("C-c C-j" . cider-jack-in)
+                ("C-c C-b" . cider-load-buffer)
+                ("C-c C-f" . cider-load-all-files)
+                ("C-c C-c" . cider-eval-defun-to-comment)
+                ("C-c C-e" . cider-eval-defun-at-point))
+#+end_src
+
+** CSS/SCSS
+
+#+begin_src emacs-lisp
+  (use-package css-mode
+    :ensure nil
+    :hook ((css-mode . hs-minor-mode)
+           (css-mode . lsp-deferred)))
+  (use-package scss-mode
+    :ensure nil
+    :hook ((scss-mode . hs-minor-mode)
+           (scss-mode . lsp-deferred)))
+#+end_src
+
+** Docker
+
+#+begin_src emacs-lisp
+  (use-package dockerfile-mode
+    :hook ((dockerfile-mode . outline-indent-minor-mode)))
+  (use-package docker-compose-mode
+    :hook ((docker-compose-mode . outline-indent-minor-mode)))
+#+end_src
+
+** Fennel
+
+#+begin_src emacs-lisp
+  (use-package fennel-mode
+    :vc (fennel-mode :url "https://git.sr.ht/~technomancy/fennel-mode"
+                     :branch "main")
+    :mode "\\.fnl\\'"
+    :hook ((fennel-mode . hs-minor-mode)
+           (fennel-mode . lsp-deferred)))
+#+end_src
+
 ** GLSL
 
 #+begin_src emacs-lisp
@@ -624,13 +681,29 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
            (glsl-mode . lsp-deferred)))
 #+end_src
 
-** C#
+** Go
 
 #+begin_src emacs-lisp
-  (use-package csharp-mode
+  (use-package go-mode
+    :hook ((go-mode . hs-minor-mode)
+           (go-mode . lsp-deferred)))
+#+end_src
+
+** Haskell
+
+#+begin_src emacs-lisp
+  (use-package haskell-mode
+    :hook ((haskell-mode . hs-minor-mode)
+           (haskell-mode . lsp-deferred)))
+#+end_src
+
+** Java
+
+#+begin_src emacs-lisp
+  (use-package java-mode
     :ensure nil
-    :hook ((csharp-mode . hs-minor-mode)
-           (csharp-mode . lsp-deferred)))
+    :hook ((java-mode . hs-minor-mode)
+           (java-mode . lsp-deferred)))
 #+end_src
 
 ** JavaScript
@@ -658,176 +731,6 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
                 ("C-l C-s" . lorem-ipsum-insert-sentences)
                 ("C-l C-i" . lorem-ipsum-insert-list))
-#+end_src
-
-** Java
-
-#+begin_src emacs-lisp
-  (use-package java-mode
-    :ensure nil
-    :hook ((java-mode . hs-minor-mode)
-           (java-mode . lsp-deferred)))
-#+end_src
-
-** Python
-
-#+begin_src emacs-lisp
-  (use-package python-mode
-    :ensure nil
-    :hook ((python-mode . hs-minor-mode)
-           (python-mode . lsp-deferred)))
-#+end_src
-
-** Lua
-
-#+begin_src emacs-lisp
-  (use-package lua-mode
-    :hook ((lua-mode . hs-minor-mode)
-           (lua-mode . lsp-deferred))
-    :config
-    (setq lua-indent-level 4))
-#+end_src
-
-** Rust
-
-#+begin_src emacs-lisp
-  (use-package rustic
-    :hook ((rust-mode . hs-minor-mode)
-           (rust-mode . lsp-deferred)))
-  (rc/local-map rust-mode-hook
-                ("C-c C-f" . rustic-cargo-fmt)
-                ("C-c C-a" . rustic-cargo-add)
-                ("C-c C-i" . rustic-cargo-init)
-                ("C-c C-t" . rustic-cargo-test)
-                ("C-c C-r" . rustic-cargo-run)
-                ("C-p" . rustic-popup)
-                ("C-r" . rustic-reload)
-                ("C-S-C" . rustic-compile)
-                ("C-f" . rustic-format-buffer))
-#+end_src
-
-** Clojure
-
-#+begin_src emacs-lisp
-  (use-package cider
-    :hook (((clojure-mode cider-mode) . hs-minor-mode)
-           ((clojure-mode cider-mode) . lsp-deferred)))
-
-  (rc/local-map clojure-mode-hook
-                ("C-c C-j" . cider-jack-in)
-                ("C-c C-b" . cider-load-buffer)
-                ("C-c C-f" . cider-load-all-files)
-                ("C-c C-c" . cider-eval-defun-to-comment)
-                ("C-c C-e" . cider-eval-defun-at-point))
-#+end_src
-
-** Go
-
-#+begin_src emacs-lisp
-  (use-package go-mode
-    :hook ((go-mode . hs-minor-mode)
-           (go-mode . lsp-deferred)))
-#+end_src
-
-** Zig
-
-#+begin_src emacs-lisp
-  (use-package zig-mode
-    :hook ((zig-mode . hs-minor-mode)
-           (zig-mode . lsp-deferred)))
-#+end_src
-
-** Web
-#+begin_src emacs-lisp
-  (use-package web-mode
-    :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
-           "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
-           "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
-    :hook ((web-mode . hs-minor-mode)
-           (web-mode . (lambda ()
-                        (when (string-suffix-p ".php" (buffer-name))
-                          (lsp-deferred))))))
-
-  (rc/local-map web-mode-hook
-                ("C-l C-l" . lorem-ipsum-insert-paragraphs)
-                ("C-l C-s" . lorem-ipsum-insert-sentences)
-                ("C-l C-i" . lorem-ipsum-insert-list))
-#+end_src
-
-** CSS/SCSS
-
-#+begin_src emacs-lisp
-  (use-package css-mode
-    :ensure nil
-    :hook ((css-mode . hs-minor-mode)
-           (css-mode . lsp-deferred)))
-  (use-package scss-mode
-    :ensure nil
-    :hook ((scss-mode . hs-minor-mode)
-           (scss-mode . lsp-deferred)))
-#+end_src
-
-** Fennel
-
-#+begin_src emacs-lisp
-  (use-package fennel-mode
-    :vc (fennel-mode :url "https://git.sr.ht/~technomancy/fennel-mode"
-                     :branch "main")
-    :mode "\\.fnl\\'"
-    :hook ((fennel-mode . hs-minor-mode)
-           (fennel-mode . lsp-deferred)))
-#+end_src
-
-** Ren'Py
-
-#+begin_src emacs-lisp
-  (use-package renpy
-    :vc (renpy-mode :url "https://github.com/Reagankm/renpy-mode.git"
-                    :branch "master")
-    :hook ((renpy-mode . outline-indent-minor-mode)))
-#+end_src
-
-** Racket
-
-#+begin_src emacs-lisp
-  (use-package racket-mode
-    :hook ((racket-mode . hs-minor-mode)))
-
-  (rc/local-map racket-mode-hook
-                ("C-r C-r" . racket-run-and-switch-to-repl)
-                ("C-r C-t" . racket-test)
-                ("C-r C-R" . racket-racket)
-                ("C-h C-h" . racket-repl-describe)
-                ("C-h C-d" . racket-documentation-search))
-#+end_src
-
-** Scheme
-
-This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] is used.
-
-#+begin_src emacs-lisp
-  (use-package geiser)
-  (use-package geiser-gambit)
-  (use-package scheme-mode
-    :ensure nil
-    :hook (scheme-mode . hs-minor-mode)
-    :init
-    (setq scheme-program-name "gsi -:d@ gambit/geiser -"))
-
-  (rc/local-map scheme-mode-hook
-                ("C-r C-r" . geiser-mode-switch-to-repl)
-                ("C-r C-S-R" . geiser)
-                ("C-r C-l" . geiser-load-file)
-                ("C-r C-s" . geiser-restart-repl)
-                ("C-r C-e" . geiser-exit-repl)
-                ("C-e C-e" . geiser-eval-definition)
-                ("C-e C-r" . geiser-eval-region)
-                ("C-e C-s" . geiser-eval-last-sexp)
-                ("C-e C-b" . geiser-eval-buffer)
-                ("C-e C-x" . geiser-eval-interrupt)
-                ("C-h C-h" . geiser-doc-symbol-at-point)
-                ("C-h C-m" . geiser-doc-module)
-                ("C-h C-S-H" . geiser-doc-look-up-manual))
 #+end_src
 
 ** Lisp
@@ -906,21 +809,93 @@ and only incidentally for machines to execute. -- Abelson & Sussman
                 ("C-m C-u" . sly-macroexpand-undo))
 #+end_src
 
-** Haskell
+** Lua
 
 #+begin_src emacs-lisp
-  (use-package haskell-mode
-    :hook ((haskell-mode . hs-minor-mode)
-           (haskell-mode . lsp-deferred)))
+  (use-package lua-mode
+    :hook ((lua-mode . hs-minor-mode)
+           (lua-mode . lsp-deferred))
+    :config
+    (setq lua-indent-level 4))
 #+end_src
 
-** Docker
+** Python
 
 #+begin_src emacs-lisp
-  (use-package dockerfile-mode
-    :hook ((dockerfile-mode . outline-indent-minor-mode)))
-  (use-package docker-compose-mode
-    :hook ((docker-compose-mode . outline-indent-minor-mode)))
+  (use-package python-mode
+    :ensure nil
+    :hook ((python-mode . hs-minor-mode)
+           (python-mode . lsp-deferred)))
+#+end_src
+
+** Racket
+
+#+begin_src emacs-lisp
+  (use-package racket-mode
+    :hook ((racket-mode . hs-minor-mode)))
+
+  (rc/local-map racket-mode-hook
+                ("C-r C-r" . racket-run-and-switch-to-repl)
+                ("C-r C-t" . racket-test)
+                ("C-r C-R" . racket-racket)
+                ("C-h C-h" . racket-repl-describe)
+                ("C-h C-d" . racket-documentation-search))
+#+end_src
+
+** Ren'Py
+
+#+begin_src emacs-lisp
+  (use-package renpy
+    :vc (renpy-mode :url "https://github.com/Reagankm/renpy-mode.git"
+                    :branch "master")
+    :hook ((renpy-mode . outline-indent-minor-mode)))
+#+end_src
+
+** Rust
+
+#+begin_src emacs-lisp
+  (use-package rustic
+    :hook ((rust-mode . hs-minor-mode)
+           (rust-mode . lsp-deferred)))
+  (rc/local-map rust-mode-hook
+                ("C-c C-f" . rustic-cargo-fmt)
+                ("C-c C-a" . rustic-cargo-add)
+                ("C-c C-i" . rustic-cargo-init)
+                ("C-c C-t" . rustic-cargo-test)
+                ("C-c C-r" . rustic-cargo-run)
+                ("C-p" . rustic-popup)
+                ("C-r" . rustic-reload)
+                ("C-S-C" . rustic-compile)
+                ("C-f" . rustic-format-buffer))
+#+end_src
+
+** Scheme
+
+This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] is used.
+
+#+begin_src emacs-lisp
+  (use-package geiser)
+  (use-package geiser-gambit)
+  (use-package scheme-mode
+    :ensure nil
+    :hook (scheme-mode . hs-minor-mode)
+    :init
+    (setq scheme-program-name "gsi -:d@ gambit/geiser -"))
+
+  (rc/local-map scheme-mode-hook
+                ("C-r C-r" . geiser-mode-switch-to-repl)
+                ("C-r C-S-R" . geiser)
+                ("C-r C-l" . geiser-load-file)
+                ("C-r C-s" . geiser-restart-repl)
+                ("C-r C-e" . geiser-exit-repl)
+                ("C-e C-e" . geiser-eval-definition)
+                ("C-e C-r" . geiser-eval-region)
+                ("C-e C-s" . geiser-eval-last-sexp)
+                ("C-e C-b" . geiser-eval-buffer)
+                ("C-e C-x" . geiser-eval-interrupt)
+                ("C-h C-h" . geiser-doc-symbol-at-point)
+                ("C-h C-m" . geiser-doc-module)
+                ("C-h C-S-H" . geiser-doc-look-up-manual))
 #+end_src
 
 ** Vue
@@ -938,4 +913,29 @@ and only incidentally for machines to execute. -- Abelson & Sussman
   (use-package yaml-mode
     :ensure nil
     :hook ((yaml-mode . outline-indent-minor-mode)))
+#+end_src
+
+** Zig
+
+#+begin_src emacs-lisp
+  (use-package zig-mode
+    :hook ((zig-mode . hs-minor-mode)
+           (zig-mode . lsp-deferred)))
+#+end_src
+
+** Web
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :mode ("\\.html\\'" "\\.phtml\\'" "\\.tpl.php\\'"
+           "\\.[agj]sp\\'" "\\.as[cp]x\\'" "\\.erb\\'"
+           "\\.mustache\\'" "\\.djhtml\\'" "\\.php\\'")
+    :hook ((web-mode . hs-minor-mode)
+           (web-mode . (lambda ()
+                        (when (string-suffix-p ".php" (buffer-name))
+                          (lsp-deferred))))))
+
+  (rc/local-map web-mode-hook
+                ("C-l C-l" . lorem-ipsum-insert-paragraphs)
+                ("C-l C-s" . lorem-ipsum-insert-sentences)
+                ("C-l C-i" . lorem-ipsum-insert-list))
 #+end_src
