@@ -598,15 +598,6 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
                       pairs))))
 #+end_src
 
-** C#
-
-#+begin_src emacs-lisp
-  (use-package csharp-mode
-    :ensure nil
-    :hook ((csharp-mode . hs-minor-mode)
-           (csharp-mode . lsp-deferred)))
-#+end_src
-
 ** C/C++
 
 #+begin_src emacs-lisp
@@ -623,6 +614,15 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
            (c++-mode . lsp-deferred))
     :init
     (setq c++-basic-offset 4))
+#+end_src
+
+** C#
+
+#+begin_src emacs-lisp
+  (use-package csharp-mode
+    :ensure nil
+    :hook ((csharp-mode . hs-minor-mode)
+           (csharp-mode . lsp-deferred)))
 #+end_src
 
 ** Clojure
