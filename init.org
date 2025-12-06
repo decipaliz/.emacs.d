@@ -154,7 +154,6 @@ every buffer.
 #+begin_src emacs-lisp
   (dolist (mode '(electric-pair-mode
                   electric-indent-mode
-                  electric-quote-mode
                   delete-selection-mode
                   global-display-line-numbers-mode
                   abbrev-mode
