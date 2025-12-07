@@ -160,6 +160,8 @@ every buffer.
                   recentf-mode
                   savehist-mode))
     (funcall mode 1))
+
+  (windmove-display-default-keybindings)
 #+end_src
 
 ** Appearance settings
