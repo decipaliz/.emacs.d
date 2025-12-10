@@ -250,6 +250,7 @@ free real estate for my own keybindings.
                 ("C-z C-b C-b" . ibuffer)
 
                 ("C-z C-o C-e" . eshell)
+                ("C-z C-o C-t" . ansi-term)
                 ("C-z C-o C-p" . list-processes)
                 ("C-z C-o C-i" . ielm)
                 ("C-z C-o C-s" . scratch-buffer)
@@ -265,7 +266,7 @@ free real estate for my own keybindings.
 
                 ("C-z C-r" . recentf)
 
-                ("C-<tab>" . complete-symbol)))
+                ("C-`" . rc/term)))
 #+end_src
 
 ** Custom functions
@@ -322,6 +323,21 @@ Toggle fold no matter what folding mode is enabled (=hs= or =outline-indent=)
     :ensure nil
     :bind (:map rc/custom-bindings-map
                 ("C-z C-f" . rc/toggle-fold)))
+#+end_src
+
+*** =rc/term=
+
+Launch =ansi-term= using the preferred shell (=rc/preferred-shell=).
+
+#+begin_src emacs-lisp
+  (defcustom rc/preferred-shell
+    "/bin/bash"
+    "Default shell to use with `rc/term`.")
+
+  (defun rc/term (&optional new-buffer-name)
+    "Launch `ansi-term` using RC/PREFERRED-SHELL."
+    (interactive)
+    (ansi-term rc/preferred-shell new-buffer-name))
 #+end_src
 
 * Packages
@@ -478,27 +494,6 @@ useful.
           which-key-idle-secondary-delay 0.01
           which-key-max-description-length 32
           which-key-sort-order 'which-key-key-order-alpha))
-#+end_src
-
-** Vterm
-
-As much as I would like to use [[info:eshell#Top][eshell]] for everything, vterm is unreplaceable.
-
-#+begin_src emacs-lisp
-  (use-package vterm
-    :bind (:map rc/custom-bindings-map
-                ("C-z C-o C-v" . vterm))
-    :init
-    (add-hook 'vterm-mode-hook (lambda () (display-line-numbers-mode -1))))
-#+end_src
-
-I also like to use vterm-toggle to open it quickly.
-
-#+begin_src emacs-lisp
-  (use-package vterm-toggle
-    :config
-    (global-set-key (kbd "C-`") #'vterm-toggle)
-    (global-set-key (kbd "C-~") #'vterm-toggle-cd))
 #+end_src
 
 ** YASnippet
