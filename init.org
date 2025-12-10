@@ -332,7 +332,8 @@ Launch =ansi-term= using the preferred shell (=rc/preferred-shell=).
 #+begin_src emacs-lisp
   (defcustom rc/preferred-shell
     "/bin/bash"
-    "Default shell to use with `rc/term`.")
+    "Default shell to use with `rc/term`."
+    :type 'string)
 
   (defun rc/term (&optional new-buffer-name)
     "Launch `ansi-term` using RC/PREFERRED-SHELL."
