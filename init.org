@@ -408,16 +408,6 @@ modeline later to get rid of this package too.
                           1))
 #+end_src
 
-** exec-path-from-shell
-
-This enables environment variables from the shell inside Emacs.
-
-#+begin_src emacs-lisp
-  (use-package exec-path-from-shell
-    :config
-    (exec-path-from-shell-initialize))
-#+end_src
-
 ** Magit
 
 The most important package by far.
