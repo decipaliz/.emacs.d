@@ -901,7 +901,7 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
     :mode "\\.ua\\'"
     :hook (uiua-mode . (lambda ()
                          (interactive)
-                         (setq buffer-face-mode-face '(:family "Uiua386" :height 160))
+                         (setq buffer-face-mode-face '(:family "Uiua386" :height 200))
                          (buffer-face-mode))))
 
   (defun rc/uiua-run ()
