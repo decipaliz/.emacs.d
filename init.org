@@ -894,6 +894,27 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
                 ("C-h C-S-H" . geiser-doc-look-up-manual))
 #+end_src
 
+** Uiua
+
+#+begin_src emacs-lisp
+  (use-package uiua-mode
+    :mode "\\.ua\\'"
+    :hook (uiua-mode . (lambda ()
+                         (interactive)
+                         (setq buffer-face-mode-face '(:family "Uiua386" :height 160))
+                         (buffer-face-mode))))
+
+  (defun rc/uiua-run ()
+    "Run current buffer with Uiua."
+    (interactive)
+    (shell-command (format "%s run %s" uiua-command (buffer-file-name))))
+
+  (rc/local-map uiua-mode-hook
+                ("C-r" . rc/uiua-run)
+                ("C-f" . uiua-format-buffer)
+                ("C-b" . uiua-standalone-compile))
+#+end_src
+
 ** Vue
 
 #+begin_src emacs-lisp
