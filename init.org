@@ -414,7 +414,8 @@ The most important package by far.
 
 #+begin_src emacs-lisp
   (use-package magit)
-  (use-package git-gutter)
+  (use-package git-gutter
+    :init (global-git-gutter-mode))
 #+end_src
 
 ** Projectile
