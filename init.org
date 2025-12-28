@@ -909,8 +909,14 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
     (interactive)
     (shell-command (format "%s run %s" uiua-command (buffer-file-name))))
 
+  (defun rc/uiua-test ()
+    "Test current buffer with Uiua."
+    (interactive)
+    (shell-command (format "%s test %s" uiua-command (buffer-file-name))))
+
   (rc/local-map uiua-mode-hook
                 ("C-r" . rc/uiua-run)
+                ("C-t" . rc/uiua-test)
                 ("C-f" . uiua-format-buffer)
                 ("C-b" . uiua-standalone-compile))
 #+end_src
