@@ -221,6 +221,14 @@ directory.
         `((".*" ,rc/autosave-directory t)))
 #+end_src
 
+** Customization group
+
+#+begin_src emacs-lisp
+  (defgroup rc nil
+    "My local customization group."
+    :group 'emacs)
+#+end_src
+
 ** Custom bindings
 
 I use a minor mode that has an associated keymap to hold all of my custom
@@ -333,7 +341,8 @@ Launch =ansi-term= using the preferred shell (=rc/preferred-shell=).
   (defcustom rc/preferred-shell
     "/bin/bash"
     "Default shell to use with `rc/term`."
-    :type 'string)
+    :type 'string
+    :group 'rc)
 
   (defun rc/term (&optional new-buffer-name)
     "Launch `ansi-term` using RC/PREFERRED-SHELL."
