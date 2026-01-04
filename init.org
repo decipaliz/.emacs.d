@@ -58,7 +58,7 @@ time =init.org= changes.
 #+begin_src emacs-lisp
   (require 'org)
 
-  (defun rc/tangle-init-org ()
+  (defun deci/tangle-init-org ()
     "Tangle the ‘init.org’ file into ‘init.el’ and byte-compile it."
     (interactive)
     ;; don't run prog-mode-hook when tangling
@@ -74,19 +74,19 @@ time =init.org= changes.
               (when (string-equal
                      (buffer-file-name)
                      (expand-file-name "init.org" user-emacs-directory))
-                (rc/tangle-init-org))))
+                (deci/tangle-init-org))))
 #+end_src
 
 ** Startup performance
 
 #+begin_src emacs-lisp
-  (defun rc/display-startup-performance ()
+  (defun deci/display-startup-performance ()
     "Display information about startup time."
     (interactive)
     (message "Emacs started in %.2fs."
              (float-time (time-subtract after-init-time
                                         before-init-time))))
-  (add-hook 'emacs-startup-hook #'rc/display-startup-performance)
+  (add-hook 'emacs-startup-hook #'deci/display-startup-performance)
 #+end_src
 
 An interesting piece of information I encountered online is the fact that you
@@ -211,20 +211,20 @@ To avoid garbage in the filesystem, I prefer to place autosaves in a special
 directory.
 
 #+begin_src emacs-lisp
-  (defvar rc/autosave-directory
+  (defvar deci/autosave-directory
     (expand-file-name "autosave/" user-emacs-directory)
     "The directory where autosave files should be put.")
 
   (setq backup-directory-alist
-        `((".*" . ,rc/autosave-directory))
+        `((".*" . ,deci/autosave-directory))
         auto-save-file-name-transforms
-        `((".*" ,rc/autosave-directory t)))
+        `((".*" ,deci/autosave-directory t)))
 #+end_src
 
 ** Customization group
 
 #+begin_src emacs-lisp
-  (defgroup rc nil
+  (defgroup deci nil
     "My local customization group."
     :group 'emacs)
 #+end_src
@@ -235,12 +235,12 @@ I use a minor mode that has an associated keymap to hold all of my custom
 keybindings.
 
 #+begin_src emacs-lisp
-  (defvar rc/custom-bindings-map (make-sparse-keymap)
+  (defvar deci/custom-bindings-map (make-sparse-keymap)
     "Keymap for custom bindings.")
-  (define-minor-mode rc/custom-bindings-mode
+  (define-minor-mode deci/custom-bindings-mode
     "Minor mode that activates custom bindings."
     :init-value t
-    :keymap rc/custom-bindings-map)
+    :keymap deci/custom-bindings-map)
 #+end_src
 
 I prefer to use a sort of a leader key for my keybindings - this leader key is
@@ -253,7 +253,7 @@ free real estate for my own keybindings.
 
   (use-package emacs
     :ensure nil
-    :bind (:map rc/custom-bindings-map
+    :bind (:map deci/custom-bindings-map
                 ("C-z C-b C-d" . kill-current-buffer)
                 ("C-z C-b C-b" . ibuffer)
 
@@ -274,17 +274,17 @@ free real estate for my own keybindings.
 
                 ("C-z C-r" . recentf)
 
-                ("C-`" . rc/term)))
+                ("C-`" . deci/term)))
 #+end_src
 
 ** Custom functions
 
 Here I will define some functions I like to use in my configuration.
 
-*** =rc/reset=
+*** =deci/reset=
 
 #+begin_src emacs-lisp
-  (defun rc/reset ()
+  (defun deci/reset ()
     "Reset all buffers, windows and frames."
     (interactive)
     (scratch-buffer)
@@ -297,30 +297,30 @@ Here I will define some functions I like to use in my configuration.
 
   (use-package emacs
     :ensure nil
-    :bind (:map rc/custom-bindings-map
-                ("C-z C-q C-r" . rc/reset)))
+    :bind (:map deci/custom-bindings-map
+                ("C-z C-q C-r" . deci/reset)))
 #+end_src
 
-*** =rc/insert-lambda=
+*** =deci/insert-lambda=
 
 #+begin_src emacs-lisp
-  (defun rc/insert-lambda ()
+  (defun deci/insert-lambda ()
     "Insert λ."
     (interactive)
     (insert-char 955 1))
 
   (use-package emacs
     :ensure nil
-    :bind (:map rc/custom-bindings-map
-                ("C-z C-\\" . rc/insert-lambda)))
+    :bind (:map deci/custom-bindings-map
+                ("C-z C-\\" . deci/insert-lambda)))
 #+end_src
 
-*** =rc/toggle-fold=
+*** =deci/toggle-fold=
 
 Toggle fold no matter what folding mode is enabled (=hs= or =outline-indent=)
 
 #+begin_src emacs-lisp
-  (defun rc/toggle-fold ()
+  (defun deci/toggle-fold ()
     "Toggle fold no matter what folding mode is enabled."
     (interactive)
     (cond
@@ -329,25 +329,25 @@ Toggle fold no matter what folding mode is enabled (=hs= or =outline-indent=)
 
   (use-package :emacs
     :ensure nil
-    :bind (:map rc/custom-bindings-map
-                ("C-z C-f" . rc/toggle-fold)))
+    :bind (:map deci/custom-bindings-map
+                ("C-z C-f" . deci/toggle-fold)))
 #+end_src
 
-*** =rc/term=
+*** =deci/term=
 
-Launch =ansi-term= using the preferred shell (=rc/preferred-shell=).
+Launch =ansi-term= using the preferred shell (=deci/preferred-shell=).
 
 #+begin_src emacs-lisp
-  (defcustom rc/preferred-shell
+  (defcustom deci/preferred-shell
     "/bin/bash"
-    "Default shell to use with `rc/term`."
+    "Default shell to use with `deci/term`."
     :type 'string
-    :group 'rc)
+    :group 'deci)
 
-  (defun rc/term (&optional new-buffer-name)
-    "Launch `ansi-term` using RC/PREFERRED-SHELL."
+  (defun deci/term (&optional new-buffer-name)
+    "Launch `ansi-term` using DECI/PREFERRED-SHELL."
     (interactive)
-    (ansi-term rc/preferred-shell new-buffer-name))
+    (ansi-term deci/preferred-shell new-buffer-name))
 #+end_src
 
 * Packages
@@ -518,7 +518,7 @@ manually search in directories using =rg=.
 
 #+begin_src emacs-lisp
   (use-package rg
-    :bind (:map rc/custom-bindings-map
+    :bind (:map deci/custom-bindings-map
                 ("C-z C-s" . rg))
     :config
     (setq rg-command-line-flags '("-."))
@@ -584,7 +584,7 @@ local leader is =C-z C-c= for me. Unfortunately, I don't think there's a way to
 set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
 
 #+begin_src emacs-lisp
-    (defmacro rc/local-map (hook &rest pairs)
+    (defmacro deci/local-map (hook &rest pairs)
       "Define a language-specific local map."
       `(add-hook ',hook
                  (lambda ()
@@ -629,7 +629,7 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
     :hook (((clojure-mode cider-mode) . hs-minor-mode)
            ((clojure-mode cider-mode) . lsp-deferred)))
 
-  (rc/local-map clojure-mode-hook
+  (deci/local-map clojure-mode-hook
                 ("C-c C-j" . cider-jack-in)
                 ("C-c C-b" . cider-load-buffer)
                 ("C-c C-f" . cider-load-all-files)
@@ -718,12 +718,12 @@ set this sort of thing concisely. Fortunately, Emacs Lisp has macros.
   (use-package prettier-js
     :hook ((typescript-mode js-mode css-mode scss-mode) . prettier-js-mode))
 
-  (rc/local-map js-mode-hook
+  (deci/local-map js-mode-hook
                 ("C-d" . jsdoc)
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
                 ("C-l C-s" . lorem-ipsum-insert-sentences)
                 ("C-l C-i" . lorem-ipsum-insert-list))
-  (rc/local-map typescript-mode-hook
+  (deci/local-map typescript-mode-hook
                 ("C-d" . jsdoc)
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
                 ("C-l C-s" . lorem-ipsum-insert-sentences)
@@ -782,7 +782,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
            racket-mode
            scheme-mode))
 
-  (rc/local-map lisp-mode-hook
+  (deci/local-map lisp-mode-hook
                 ("C-s" . sly)
                 ("C-r" . sly-restart-inferior-lisp)
                 ("C-a" . sly-apropos)
@@ -821,7 +821,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
 #+begin_src emacs-lisp
   (use-package org-mode
     :ensure nil
-    :bind (:map rc/custom-bindings-map
+    :bind (:map deci/custom-bindings-map
                 ("C-c l" . org-store-link)))
 #+end_src
 
@@ -840,7 +840,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
   (use-package racket-mode
     :hook ((racket-mode . hs-minor-mode)))
 
-  (rc/local-map racket-mode-hook
+  (deci/local-map racket-mode-hook
                 ("C-r C-r" . racket-run-and-switch-to-repl)
                 ("C-r C-t" . racket-test)
                 ("C-r C-R" . racket-racket)
@@ -863,7 +863,7 @@ and only incidentally for machines to execute. -- Abelson & Sussman
   (use-package rustic
     :hook ((rust-mode . hs-minor-mode)
            (rust-mode . lsp-deferred)))
-  (rc/local-map rust-mode-hook
+  (deci/local-map rust-mode-hook
                 ("C-c C-f" . rustic-cargo-fmt)
                 ("C-c C-a" . rustic-cargo-add)
                 ("C-c C-i" . rustic-cargo-init)
@@ -888,7 +888,7 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
     :init
     (setq scheme-program-name "gsi -:d@ gambit/geiser -"))
 
-  (rc/local-map scheme-mode-hook
+  (deci/local-map scheme-mode-hook
                 ("C-r C-r" . geiser-mode-switch-to-repl)
                 ("C-r C-S-R" . geiser)
                 ("C-r C-l" . geiser-load-file)
@@ -914,19 +914,19 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
                          (setq buffer-face-mode-face '(:family "Uiua386" :height 200))
                          (buffer-face-mode))))
 
-  (defun rc/uiua-run ()
+  (defun deci/uiua-run ()
     "Run current buffer with Uiua."
     (interactive)
     (shell-command (format "%s run %s" uiua-command (buffer-file-name))))
 
-  (defun rc/uiua-test ()
+  (defun deci/uiua-test ()
     "Test current buffer with Uiua."
     (interactive)
     (shell-command (format "%s test %s" uiua-command (buffer-file-name))))
 
-  (rc/local-map uiua-mode-hook
-                ("C-r" . rc/uiua-run)
-                ("C-t" . rc/uiua-test)
+  (deci/local-map uiua-mode-hook
+                ("C-r" . deci/uiua-run)
+                ("C-t" . deci/uiua-test)
                 ("C-f" . uiua-format-buffer)
                 ("C-b" . uiua-standalone-compile))
 #+end_src
@@ -952,7 +952,7 @@ This configuration is implying that [[http://gambitscheme.org/][Gambit Scheme]] 
                         (when (string-suffix-p ".php" (buffer-name))
                           (lsp-deferred))))))
 
-  (rc/local-map web-mode-hook
+  (deci/local-map web-mode-hook
                 ("C-l C-l" . lorem-ipsum-insert-paragraphs)
                 ("C-l C-s" . lorem-ipsum-insert-sentences)
                 ("C-l C-i" . lorem-ipsum-insert-list))
